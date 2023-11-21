@@ -1,0 +1,783 @@
+fileFormatVersion: 2
+guid: 3f11c626ad4de3d4a8b076858d3c45f7
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -5308227764167481651
+    second: jiggle
+  - first:
+      74: 8034496369646158193
+    second: lift
+  - first:
+      74: -4618694888493504301
+    second: jiggle_1
+  - first:
+      74: 5680424988379543073
+    second: lift_1
+  - first:
+      74: 88577628089690623
+    second: Take 001_1
+  - first:
+      74: 1622710125020071428
+    second: falldown
+  - first:
+      74: -4305357244873041912
+    second: falldown_2
+  - first:
+      74: -2481596286897056705
+    second: fly
+  - first:
+      74: -6152116410953614479
+    second: fly_land
+  - first:
+      74: -3815072391521933969
+    second: fly_land_2
+  - first:
+      74: -4699095134841796520
+    second: fly_takeoff
+  - first:
+      74: 8020026232899164787
+    second: fly_takeoff_2
+  - first:
+      74: 1084790289961582138
+    second: movement_idle
+  - first:
+      74: -2940872727419079658
+    second: movement_idle_2
+  - first:
+      74: 7120450248383603231
+    second: thing_power_emote_2
+  - first:
+      74: 7490887377711229557
+    second: Take 001_2
+  - first:
+      74: 3551403579758161483
+    second: Take 001_4
+  - first:
+      74: 8874073209418363151
+    second: Take 001_5
+  - first:
+      74: -5490876350799085464
+    second: Take 001_6
+  - first:
+      74: -1567172232281196513
+    second: Take 001_7
+  - first:
+      74: 8063862206960822878
+    second: attack_1_laugh
+  - first:
+      74: 2133556433627895153
+    second: attack_1_laugh_end
+  - first:
+      74: 6953646138930763170
+    second: attack_1_laugh_start
+  - first:
+      74: -3154714022004917164
+    second: attack_2_summon
+  - first:
+      74: 1978103507606990130
+    second: attack_3_yell
+  - first:
+      74: 2018655499098295838
+    second: movement_idle_1
+  - first:
+      74: -585360494915493316
+    second: Take 001_8
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_Abandoned_Car1-anten__collapsed
+    second: {fileID: 2100000, guid: 853d7f8905d0269458993648cb4ed538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_Abandoned_Car1-body__collapsed
+    second: {fileID: 2100000, guid: 203de3d24395cf3459b99a51972c5982, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_Abandoned_Car1-fenderL__collapsed
+    second: {fileID: 2100000, guid: 506b798d1f9ed6345becebbde8dca9e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_Abandoned_Car1-fenderR__collapsed
+    second: {fileID: 2100000, guid: 62ff9517fcf59734198f7b8ecb5f1079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_Abandoned_Car1-hood__collapsed
+    second: {fileID: 2100000, guid: 8b098f97d610279458fb866e350a1f2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_Abandoned_Car1-wheels__collapsed
+    second: {fileID: 2100000, guid: 2bb9d9b6e2ed2ef44809464f4ea657e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_active_base_MAT_0
+    second: {fileID: 2100000, guid: bcfe7013041d64148ad9a995dc8b3ffd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car1_anim_active_top_MAT_0
+    second: {fileID: 2100000, guid: 154f02effef697246b7988a21b0c24d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_Abandoned_Car2-axle__collapsed
+    second: {fileID: 2100000, guid: 638aa74e53251d54aa2fe4d38fcb929d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_Abandoned_Car2-body_MAT_12
+    second: {fileID: 2100000, guid: 6e0735b857386014bb3c16e47c7f296b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_Abandoned_Car2-body__collapsed
+    second: {fileID: 2100000, guid: a2359142b2bbb0c4caa25938d15c5ed6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_Abandoned_Car2-fenderLB__collapsed
+    second: {fileID: 2100000, guid: 533b14cf37512c14986d00b26012bf86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_Abandoned_Car2-hood__collapsed
+    second: {fileID: 2100000, guid: 0f1cb28aff165534984e4eb1f1e5dbd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_Abandoned_Car2-light__collapsed
+    second: {fileID: 2100000, guid: e0ed5faf8cc04334abe866c5db913662, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_active_base_MAT_0
+    second: {fileID: 2100000, guid: 3a5b27508457d7949afdbf7a15f94416, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Abandoned_Car2_anim_active_top_MAT_0
+    second: {fileID: 2100000, guid: 9c393f3f8dffdb1498124e02eec013be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crate_Crate__collapsed
+    second: {fileID: 2100000, guid: ff5d87410e8b8f64e98dbaab986f8969, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Daredevil_Spotlight_Daredevil_Spotlight-00_VC_0
+    second: {fileID: 2100000, guid: d02a203b59409eb4db40aec6b6c338a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Daredevil_Spotlight_Daredevil_Spotlight-01_MAT_2
+    second: {fileID: 2100000, guid: 5c19ae493a17b4a4eaaedf389f9aa4c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Daredevil_Spotlight_Daredevil_Spotlight-01__collapsed
+    second: {fileID: 2100000, guid: b5165aa338f13cb4c85f845e181d52f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Daredevil_Spotlight_Daredevil_Spotlight_Shine_MAT_0
+    second: {fileID: 2100000, guid: 6a77581a2dfc67341854cdafe9878425, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Daredevil_Spotlight_Daredevil_Spotlight_VC_0
+    second: {fileID: 2100000, guid: 0330b748bdb61a74f91ab9c7eedf1077, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorA2_active_base_MAT_0
+    second: {fileID: 2100000, guid: 3a69ed3e589c7bb4b96fe416b82a7840, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorA2_active_top_MAT_0
+    second: {fileID: 2100000, guid: 8c9fd6ab0aabb2541b4ef48f9545a842, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dumpster_Dumpster__collapsed
+    second: {fileID: 2100000, guid: 2ea07599d1f691447bc876d382725420, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fan_Fan__collapsed
+    second: {fileID: 2100000, guid: fe77f48aec1f80d489bc7d3b6f7dfabb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_Backface_Blocker_Hecks_Kitchen_Alleyway_Backface_Blocker__collapsed
+    second: {fileID: 2100000, guid: 1532c49b9045f5d4b8104b77792f32ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_Hecks_Kitchen_Alleyway_ShineFX_MAT_0
+    second: {fileID: 2100000, guid: 23de23c043b370e49980a2a2b640fdff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_Hecks_Kitchen_Alleyway_ShineFX_MAT_1
+    second: {fileID: 2100000, guid: 24bd02179249bf44dacd1b2d39a94a59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_Hecks_Kitchen_Alleyway_ShineFX_MAT_2
+    second: {fileID: 2100000, guid: 03d5646aad74eb84eb6fa002d826333a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_Hecks_Kitchen_Alleyway_ShineFX_MAT_3
+    second: {fileID: 2100000, guid: cd95d8dd4b483f6468d74d3a965e11ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_variant1_Hecks_Kitchen_Alleyway_ShineFX_variant1_MAT_0
+    second: {fileID: 2100000, guid: 740f129e7c61c9b4fad84f6402d9d127, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_variant1_Hecks_Kitchen_Alleyway_ShineFX_variant1_MAT_1
+    second: {fileID: 2100000, guid: fcdf3909f5392c14bab073c4b8998f97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_variant2_Hecks_Kitchen_Alleyway_ShineFX_variant2_MAT_0
+    second: {fileID: 2100000, guid: 6d89591e269e24c479ce6f25085ef9f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_variant2_Hecks_Kitchen_Alleyway_ShineFX_variant2_MAT_1
+    second: {fileID: 2100000, guid: f276c9b631b4caa4c89523230f117fdb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Alleyway_ShineFX_variant2_Hecks_Kitchen_Alleyway_ShineFX_variant2_MAT_2
+    second: {fileID: 2100000, guid: e8a4ca0ed9a8380489f4dd9ac510768c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Skybox 3
+    second: {fileID: 2100000, guid: 40d197c8b77641740ad07cdd4da72c42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_Boss_arena_Hecks_Kitchen_Tile_Boss_arena_MAT_11
+    second: {fileID: 2100000, guid: 767736b2a9ca92249a19d0c259d0612d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_Boss_arena_Hecks_Kitchen_Tile_Boss_arena_MAT_13
+    second: {fileID: 2100000, guid: cc08096a978ccf34eafe751885f5716b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_Boss_arena_Hecks_Kitchen_Tile_Boss_arena__collapsed
+    second: {fileID: 2100000, guid: d578bc998bb6783468dd7d0312d74a06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_Hecks_Kitchen_Tile_TShape_01_MAT_1
+    second: {fileID: 2100000, guid: 83a65684d5d69084ca4d75958809e63d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_Hecks_Kitchen_Tile_TShape_01_MAT_2
+    second: {fileID: 2100000, guid: f9cc755d1bf055b499a04ed3b9e08e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_Hecks_Kitchen_Tile_TShape_01_MAT_3
+    second: {fileID: 2100000, guid: 6b6a0ac14aebb8e41ab47a3f22792a0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_Hecks_Kitchen_Tile_TShape_01_MAT_6
+    second: {fileID: 2100000, guid: fc32f1231e6b97f428d8f07fa056ae05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_Hecks_Kitchen_Tile_TShape_01_MAT_7
+    second: {fileID: 2100000, guid: 8eb860629296f4b419d980fb70c18a67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_Hecks_Kitchen_Tile_TShape_01__collapsed
+    second: {fileID: 2100000, guid: e8fa6288728f7f24bb8bf7f7e94a306c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_jiffyPopVent__collapsed
+    second: {fileID: 2100000, guid: f02570e2da5d22b458e90d13982fb90f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TShape_01_jiffyPopVenttop__collapsed
+    second: {fileID: 2100000, guid: 525d6b3050fd0754a8024988269ae84b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TieredDisc_01_Hecks_Kitchen_Tile_TieredDisc_01_MAT_4
+    second: {fileID: 2100000, guid: 4a08afa3b1eb4ba49850721bc994a7f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TieredDisc_01_Hecks_Kitchen_Tile_TieredDisc_01_MAT_5
+    second: {fileID: 2100000, guid: c070c6e2c24fa9847b1201723ce4dd73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_Tile_TieredDisc_01_Hecks_Kitchen_Tile_TieredDisc_01__collapsed
+    second: {fileID: 2100000, guid: 3ebd758e12123dc4c928804436945e63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hecks_Kitchen_tile_Background_05_Hecks_Kitchen_tile_Background_05__collapsed
+    second: {fileID: 2100000, guid: 3f93af278ba81db4aadb439c05c9e514, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Boss_01-Kingpin_01
+    second: {fileID: 2100000, guid: 2b4181bcd1007644e9dab2d53549b969, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Boss_01-Kingpin_01_Head
+    second: {fileID: 2100000, guid: ea0ec298d8909554d84acf086be09909, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Helicopter_Kingpin_Helicopter_MAT_4
+    second: {fileID: 2100000, guid: d1ead35d804a02e49a68a2dba0c81bf9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Helicopter_Kingpin_Helicopter_Propeller01_MAT_0
+    second: {fileID: 2100000, guid: ce46f099ff2895944ba5add98f7d5b41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Helicopter_Kingpin_Helicopter_Propeller_MAT_0
+    second: {fileID: 2100000, guid: 869f8d59f42359745a3f2eca82ed64a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Helicopter_Kingpin_Helicopter__collapsed
+    second: {fileID: 2100000, guid: e08857bcf7421514caad7c423f1cd5f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Tower_Kingpin_Tower_MAT_1
+    second: {fileID: 2100000, guid: fb9c0f03f9e880c449c118593c4d1e7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Tower_Kingpin_Tower_MAT_2
+    second: {fileID: 2100000, guid: b1d0e0617cc6d064e95d145700e59d52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Tower_Kingpin_Tower_MAT_3
+    second: {fileID: 2100000, guid: c8c58de2645e47643a3e7a5b68e21804, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Tower_Kingpin_Tower__collapsed
+    second: {fileID: 2100000, guid: a46477c58e385b14fa40e21102f9ee03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kingpin_Tower_shine_Fx_Kingpin_Tower_shine_Fx_MAT_0
+    second: {fileID: 2100000, guid: 2921a619a3bcff14486ac95f83527a23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 9e7fad6dc5f8fce448168296578b5cb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pigeon_01-body
+    second: {fileID: 2100000, guid: e60573ba617c0f644a3d0c3604f2130c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PowerupCrate_V2_PowerupCrate_V2__collapsed
+    second: {fileID: 2100000, guid: 66fbfc01057c23e4c8dbfca7b8c2a30b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PowerupCrate_V2_powerUpCrate2_V2__collapsed
+    second: {fileID: 2100000, guid: fa8755d890414e94e86b8388d2cdb608, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PowerupCrate_V2_powerUpCrate3_V2__collapsed
+    second: {fileID: 2100000, guid: 2de24d408e92454488fa9cdb0bb59635, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PowerupCrate_V2_powerUpCrate4_V2__collapsed
+    second: {fileID: 2100000, guid: 36049466aa5bfe043a21679d0733c176, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PowerupCrate_V2_powerUpCrate5_V2_AO_0
+    second: {fileID: 2100000, guid: 7894d75980a405a48b2753dd3f7acd31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RooftopProp_Smokestack-00_RooftopProp_Smokestack-00__collapsed
+    second: {fileID: 2100000, guid: 67fe9756f8fa70347842a9d0eecf4ecf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RooftopProp_Smokestack-01_RooftopProp_Smokestack-01__collapsed
+    second: {fileID: 2100000, guid: db722aaebeab67f46add849d626b820d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RooftopProp_Smokestacks_Small_RooftopProp_Smokestacks_Small__collapsed
+    second: {fileID: 2100000, guid: 9dfdfbfb9e1a2c64d8955f7359156529, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RooftopProp_Tank-00_RooftopProp_Tank-00__collapsed
+    second: {fileID: 2100000, guid: 9d373d16dfcbb484fb039b1c68e20a6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RooftopProp_Tank-01_RooftopProp_Tank-01__collapsed
+    second: {fileID: 2100000, guid: fd39accf362f0a0409d8bd28c572ddef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RooftopProp_Water_Tower_RooftopProp_Water_Tower__collapsed
+    second: {fileID: 2100000, guid: 3297c3f3017c7f346b53d75e504dffec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Searchlight_Searchlight_MAT_0
+    second: {fileID: 2100000, guid: 9d965d9ad2d869a42881e7c82d1bc335, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Throwable_AC_Unit_Throwable_AC_Unit__collapsed
+    second: {fileID: 2100000, guid: 58f4807669397544fb4d07c6b2100e16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Throwable_BBQ_Grill_Throwable_BBQ_Grill__collapsed
+    second: {fileID: 2100000, guid: f29f668293580b14393c2146f596f222, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Throwable_Powerbox_Floor_Throwable_Powerbox_Floor_MAT_3
+    second: {fileID: 2100000, guid: 91d127767edb86443b9022b606d93a6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Throwable_Powerbox_Floor_Throwable_Powerbox_Floor__collapsed
+    second: {fileID: 2100000, guid: 585aa372406075741bcd59ddc63a7714, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trash_Can_Destroyed_Trash_Can_Destroyed__collapsed
+    second: {fileID: 2100000, guid: dd5f8462d5370fa4ea0253a0d812ce6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trash_Can_Trash_Can__collapsed
+    second: {fileID: 2100000, guid: d65e02a467d487147815bd5f09ce6336, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bg_rain_plane_bg_rain_plane_MAT_0
+    second: {fileID: 2100000, guid: def7b0fe564264743a14fd5bf279a3a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chubbyarrow_diff_tex
+    second: {fileID: 2100000, guid: d4baa0ebff0d28b45883310765967731, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chubbyarrow_diff_text_higlight
+    second: {fileID: 2100000, guid: 8885223235d9e5a43973a1f4a12a0a3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gear_1_Gear1__collapsed
+    second: {fileID: 2100000, guid: 8d93a11718e09c347afe9f1c66a6571e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: golden_power_up_crate_golden_power_up_crate_MAT_0
+    second: {fileID: 2100000, guid: e6622135b50131348a77b2c3bcb3d9e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_street_Plane_hecks_kitchen_street_Plane_MAT_0
+    second: {fileID: 2100000, guid: f4f7bb1ab8b8f4c4cbd48bd8a151ac7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_Detailed_fountains_falls4_MAT_0
+    second: {fileID: 2100000, guid: e56138692823aa745bd09712755ad40c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_Detailed_fountains_falls4b_MAT_0
+    second: {fileID: 2100000, guid: c94a2999514682f46a037ef66b07b471, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_Detailed_fountains_falls4c_MAT_0
+    second: {fileID: 2100000, guid: c20d9dc2f1b690c47afc7f9f851b1a07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_Detailed_fountains_falls4d_MAT_0
+    second: {fileID: 2100000, guid: 3d8280ca331116147901aa59921da7ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_Hecks_Kitchen_Tile_Nunchucks_FireEscapes__collapsed
+    second: {fileID: 2100000, guid: d538dad0017552749b685d5bba488a27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_Hecks_Kitchen_Nunchucks_sign_VC_0
+    second: {fileID: 2100000, guid: 1348bcc2aa5d057458b059041882552b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_Hecks_Kitchen_Nunchucks_windowz_LO_MAT_1
+    second: {fileID: 2100000, guid: 88b165057b721ac4f80876562e1d5796, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_Hecks_Kitchen_Nunchucks_windowz_LO_MAT_2
+    second: {fileID: 2100000, guid: 7bde1751c55600e43b52b977bccfe239, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_Hecks_Kitchen_Nunchucks_windowz_LO__collapsed
+    second: {fileID: 2100000, guid: 9feb03833a425c84f975a29c5a638c4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_hecks_kitchen_tile_nunchucks_LO_MAT_2
+    second: {fileID: 2100000, guid: 17174a2dede04244eaf375ad0ddf17a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_hecks_kitchen_tile_nunchucks_LO_MAT_7
+    second: {fileID: 2100000, guid: ff5400b627d640e4baa5779d0c117d5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_hecks_kitchen_tile_nunchucks_LO_MAT_8
+    second: {fileID: 2100000, guid: 8f9a2a17a72b094489674724d2c98973, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_LO_hecks_kitchen_tile_nunchucks_LO__collapsed
+    second: {fileID: 2100000, guid: 5bbb5cac4cba1724d8bd13b90ed318b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_hecks_kitchen_tile_nunchucks_MAT_10
+    second: {fileID: 2100000, guid: d1b336df750bd1344878e6104f905720, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_hecks_kitchen_tile_nunchucks_MAT_2
+    second: {fileID: 2100000, guid: 0445b84140f1ac44db905c0d5412f716, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_hecks_kitchen_tile_nunchucks_MAT_3
+    second: {fileID: 2100000, guid: 5ab96e058e492a247bd38e333a3f9b83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hecks_kitchen_tile_nunchucks_hecks_kitchen_tile_nunchucks__collapsed
+    second: {fileID: 2100000, guid: 3f861436f93de9541af39a70cf7f09cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: neutronring2_add_tex
+    second: {fileID: 2100000, guid: 572939623f6b44e4ba0612fff93f9b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: neutronring2speed_add_tex
+    second: {fileID: 2100000, guid: aa72490a919b1cd48bfefdeec1e1f67f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: neutronring_add_tex
+    second: {fileID: 2100000, guid: 5e15d4ed8db6d8444aee8f8cffc3e58d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: neutronringspeed_add_tex
+    second: {fileID: 2100000, guid: 84b96dfd66446b4419b0890c987d6e38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: powerUpCrate_Display_1_powerUpCrate_Display_1_MAT_0
+    second: {fileID: 2100000, guid: c73f306c90ca10744844096a2c2bdbc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: powerUpCrate_Display_2_powerUpCrate_Display_2_MAT_0
+    second: {fileID: 2100000, guid: 798aa091291845448b2bda349d5f3a6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: powerUpCrate_Display_3_powerUpCrate_Display_3_MAT_0
+    second: {fileID: 2100000, guid: dfdb315af58183b4b94eed4113852374, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: powerUpCrate_Display_Top_powerUpCrate_Display_Top_MAT_0
+    second: {fileID: 2100000, guid: 87f40b540841af848ad7bffa0be69a5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shs_generic_teleporter_shs_generic_teleporter_MAT_2
+    second: {fileID: 2100000, guid: ab9d34b99fe57974d84800eaea938e3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shs_generic_teleporter_shs_generic_teleporter__collapsed
+    second: {fileID: 2100000, guid: 544a728791298ab4c8df0a32b1420b99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sign_broken_Sign_broken02__collapsed
+    second: {fileID: 2100000, guid: 6b3e3f4afa6929f499ddf1b09a4126d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sign_broken_Sign_broken_anim__collapsed
+    second: {fileID: 2100000, guid: afdfcd339d2a90d4da6ce48ad5c15b28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: singledirectionhotspots_diff_tex
+    second: {fileID: 2100000, guid: b0b8d6aaf84baef459dbad657833cb04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: singledirectionhotspots_diff_tex_higlight
+    second: {fileID: 2100000, guid: dec61f1889a89c64b9ee5ab180d48ae9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tikiMask_tikiMask_VC_0
+    second: {fileID: 2100000, guid: a6ba4cb03cb7f5a4290b68c326dc539f, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 100
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
