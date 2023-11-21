@@ -22,14 +22,14 @@ public class FruitSnack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int randomHealth = Random.Range(20, 40);
-
         if (other.CompareTag("Player") && controller.health < 100)
         {
+            float randomHealth = Random.Range(20, 40);
+
             fruitSound.GetComponent<AudioSource>().Play();
             Destroy(gameObject, 0.5f);
 
-            int healthToAdd = Mathf.Min(100 - controller.health, randomHealth);
+            float healthToAdd = Mathf.Min(100 - controller.health, randomHealth);
 
             controller.health += healthToAdd;
             controller.healthSlider.value = controller.health;

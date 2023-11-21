@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,11 +17,15 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     public bool isDeadAnimation;
     public bool isPickedUp;
-    public int health = 100;
+    public float health = 100;
+    public float rage = 0;
     public float playerSpeed = 2.0f;
     public float jumpForce = 1.0f;
     public float _speed = 10;
     public float _rotationSpeed = 60;
+    public float smallAttackDamage = 5;
+    public float largeAttackDamage = 15;
+    public float rageAttackDamage = 25;
     private Vector3 rotation;
     public Coroutine coroutine = null;
     public GameObject[] claws;
@@ -36,10 +41,12 @@ public class PlayerController : MonoBehaviour
     public int maxAttack;
     public bool playingAnim;
     public Slider healthSlider;
-    public AudioSource deadAudio, hurtSound;
+    public Slider rageMeter;
+    public AudioSource deadAudio, hurtSound,rageSound,whisperingRageSounds;
     public bool isAttacking = false;
     public bool isBlocking = false;
     public bool isCurrentlyPickingUp = false;
+    public bool isRaging = false;
     public string horizontalInputAxis;
     public string verticalInputAxis;
     public string jumpInputButton;
@@ -47,11 +54,20 @@ public class PlayerController : MonoBehaviour
     public string blockInputButton;
     public string dashInputButton;
     public string pickupButton;
+    public string rageEffectButton;
     public string playerIdentifier;
+    public GameObject[] rageClawEffects;
+    public Light directionalLight;
+    public Color directionalLightColor;
     private void Start()
     {
+        directionalLight.color = directionalLightColor;
         Cursor.visible = false;
         healthSlider.value = health;
+        rageMeter.value = rage;
+        rageClawEffects[0].SetActive(false);
+        rageClawEffects[1].SetActive(false);
+        rageClawEffects[2].SetActive(false);
     }
 
     private void Update()
@@ -187,11 +203,12 @@ public class PlayerController : MonoBehaviour
             isCurrentlyPickingUp = true;
             anim.SetBool("isCurrentlyPickingUp", isCurrentlyPickingUp);
         }
-      //  if (Input.GetButtonDown(dashInputButton))
-      //  {
-          //  Dash(1.0f); 
-        //}
+       
+      
+        ActivateRageEffect();
     }
+   
+
 
     bool isGrounded()
     {
@@ -230,19 +247,21 @@ public class PlayerController : MonoBehaviour
                         {
                             if (!enemy.GetComponent<Enemy>().isDead)
                             {
-                                enemy.GetComponent<Enemy>().health -= 10;
+                                enemy.GetComponent<Enemy>().health -= largeAttackDamage;
                                 enemy.GetComponent<Rigidbody>().AddForce(vector3.normalized * pushPower, ForceMode.Impulse);
                                 enemy.GetComponent<Rigidbody>().AddForce(Vector3.up * 8f, ForceMode.Impulse);
                                 enemy.GetComponent<Enemy>().startMove = false;
                                 enemy.GetComponent<Animator>().SetTrigger("DamageBig");
+                                Debug.Log(enemy.GetComponent<Enemy>().health);
                             }
                         }
                         else
                         {
                             if (!enemy.GetComponent<Enemy>().isDead)
                             {
-                                enemy.GetComponent<Enemy>().health -= 5;
+                                enemy.GetComponent<Enemy>().health -= smallAttackDamage;
                                 enemy.GetComponent<Animator>().SetTrigger("DamageSmall");
+                                Debug.Log(enemy.GetComponent<Enemy>().health);
                             }
                         }
                         var Rot = Quaternion.LookRotation(transform.position - enemy.transform.position);
@@ -293,7 +312,55 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void ActivateRageEffect()
+    {
+        if (Input.GetButton(rageEffectButton)&&rage>=100)
+        {
+            rageClawEffects[0].SetActive(true);
+            rageClawEffects[1].SetActive(true);
+            rageClawEffects[2].SetActive(true);
+            isRaging =true;
+            rageSound.Play();
+            
+        }
+        if (isRaging == true)
+        {
+            directionalLight.color = Color.black;
+            playerSpeed = 10; 
+            smallAttackDamage = rageAttackDamage;
+            largeAttackDamage = rageAttackDamage;
+            rage -= 10 * Time.deltaTime;
+            health += 2 * Time.deltaTime;
+            rageMeter.value = rage;
+            healthSlider.value = health;
+          GameManager.instance.RageSlowMotion();
+            GameManager.instance.aud.Pause();
+          //  whisperingRageSounds.Play();
+            Debug.Log(rage);
+        }
+        if (rage <= 0)
+        {
+            playerSpeed = 5;
+            rageMeter.value = rage;
+            isRaging = false;
+            rageClawEffects[0].SetActive(false);
+            rageClawEffects[1].SetActive(false);
+            rageClawEffects[2].SetActive(false);
+            smallAttackDamage = 5;
+            largeAttackDamage = 15;
+           GameManager.instance.RageEndMotion();
+       //     whisperingRageSounds.Stop();
+            directionalLight.color = directionalLightColor;
+            GameManager.instance.aud.UnPause();
+        }
 
+    }
+    public void AddRage()
+    {
+        rage += 20;
+        rageMeter.value = rage;
+    }
+   
     void RestartGame()
     {
         GameManager.instance.Restart();

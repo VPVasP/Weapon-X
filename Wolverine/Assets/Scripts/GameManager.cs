@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Vector3 gizmosPosition1;
     private bool hasSpawnedEnemies = false;
     private bool hasTriggeredEndOfWave1 = false;
+    private bool isSlowedTime = false;
     public int enemiesToSpawn;
     public GameObject EndCanvas;
     public int Coins;
@@ -40,8 +41,10 @@ public class GameManager : MonoBehaviour
     public Slider secondPlayerSlider;
     public int secondPlayerHealth;
     public GameObject spawnPlayer2Text,player1Text;
-    public GameObject phase2;
+    public GameObject[] phases;
     public GameObject[] doors;
+    public Transform spawnPoint;
+
     private void Awake()
     {
         instance = this;
@@ -58,11 +61,10 @@ public class GameManager : MonoBehaviour
         isInRound1 = true;
         enemiesToSpawn = 3;
         EnemySpawner(enemiesToSpawn);
-      //  players[0].GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
         secondPlayerSlider.gameObject.SetActive(false);
         spawnPlayer2Text.SetActive(true);
         doors[0].SetActive(true);
-        phase2.SetActive(false);
+        phases[0].SetActive(false);
     }
 
 
@@ -98,8 +100,18 @@ public class GameManager : MonoBehaviour
 
 
             case 10:
-                doors[0].SetActive(false);
-                phase2.SetActive(true);
+
+                if (!hasSpawnedEnemies)
+                {
+                    doors[0].SetActive(false);
+                    phases[0].SetActive(true);
+                    enemiesToSpawn = 2;
+                    EnemySpawnerInTransforms(enemiesToSpawn);
+                    hasSpawnedEnemies = true;
+                }
+                
+                
+               
                 break;
             case 12:
                 doors[1].SetActive(false);
@@ -182,9 +194,9 @@ public class GameManager : MonoBehaviour
             {
                 GameObject enemy = enemies[Random.Range(0, enemies.Length)];
 
-                float offsetX = Random.Range(-5f, 8f);
+                float offsetX = Random.Range(-4f,4f);
                 float offsetY = Random.Range(-0.5f, 0.5f);
-                float offsetZ = Random.Range(-8f, 9f);
+                float offsetZ = Random.Range(-4f,7f);
 
                 Vector3 randomSpawnPoint = GetRandomPointInCube(new Vector3(offsetX, offsetY, offsetZ));
                 Instantiate(enemy, randomSpawnPoint, Quaternion.identity);
@@ -194,7 +206,32 @@ public class GameManager : MonoBehaviour
         }
         
     }
- 
+    public void EnemySpawnerInTransforms(int numberOfEnemies)
+    {
+
+
+
+        int enemiesClones = numberOfEnemies;
+
+
+        if (enemies.Length > 0)
+        {
+            for (int i = 0; i < enemiesClones; i++)
+            {
+                GameObject enemy = enemies[Random.Range(0, enemies.Length)];
+
+                float offsetX = Random.Range(-1f,1f);
+                float offsetY = Random.Range(-0.5f, 0.5f);
+                float offsetZ = Random.Range(-2f,2f);
+
+                Transform transformPoint = spawnPoint;
+                Instantiate(enemy, transformPoint.position, Quaternion.identity);
+            }
+
+
+        }
+
+    }
     public void PlayStart()
     {
         waves[0].SetActive(true);
@@ -242,7 +279,32 @@ public class GameManager : MonoBehaviour
 
         GameObject newFruit = Instantiate(fruit, fruitPos.position, Quaternion.identity);
     }
-
+    public void RageSlowMotion()
+    {
+        if (players[0].GetComponent<PlayerController>().isRaging == true)
+        {
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().speed = 1;
+            }
+        }
+    }
+    public void RageEndMotion()
+    {
+        foreach (var enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().speed = 4;
+        }
+    
+    }
+    public void AddRage()
+    {
+        if (players[0].GetComponent<PlayerController>().rage < 100 & players[0].GetComponent<PlayerController>().isRaging==false)
+        {
+            players[0].GetComponent<PlayerController>().AddRage();
+        }
+       
+    }
     public void FollowSecondPlayer()
     {
 

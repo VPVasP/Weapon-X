@@ -550,11 +550,11 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: VerticalP3
+    m_Name: RageGiverP1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
+    negativeButton: 
+    positiveButton: z
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3

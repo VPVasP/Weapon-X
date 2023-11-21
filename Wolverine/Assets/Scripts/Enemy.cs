@@ -129,11 +129,14 @@ public class Enemy : MonoBehaviour
             isDead = true;
             anim.SetTrigger("Dead");
             print("DEAD");
+            
             GameManager.instance.enemiesKilled += 1;
             GameManager.instance.enemiesKilledText.text = "Enemies Killed: " + GameManager.instance.enemiesKilled;
             GameManager.instance.Coins += randomCoins;
+            GameManager.instance.AddRage();
             aud.clip = enemySounds[1];
             aud.Play();
+        
             StartCoroutine(dead());
         }
     }
