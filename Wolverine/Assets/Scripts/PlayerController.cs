@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Experimental.GlobalIllumination;
+using Mono.Cecil;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,16 +53,17 @@ public class PlayerController : MonoBehaviour
     public string jumpInputButton;
     public string attackInputButton;
     public string blockInputButton;
-    public string dashInputButton;
     public string pickupButton;
     public string rageEffectButton;
     public string playerIdentifier;
     public GameObject[] rageClawEffects;
     public Light directionalLight;
     public Color directionalLightColor;
+    public Color normalColor;
+ //   public GameObject fireEffects;
     private void Start()
     {
-        directionalLight.color = directionalLightColor;
+        directionalLight.color = normalColor;
         Cursor.visible = false;
         healthSlider.value = health;
         rageMeter.value = rage;
@@ -91,9 +93,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 forwardVector = (transform.position - new Vector3(camTransform.position.x, transform.position.y, camTransform.position.z)).normalized;
         Vector3 rightVector = Vector3.Cross(forwardVector, Vector3.up);
-        float y = Input.GetAxis(verticalInputAxis);
-        float x = Input.GetAxis(horizontalInputAxis);
-        Vector3 between = (forwardVector * y) + (-x * rightVector);
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        Vector3 between = (forwardVector * vertical) + (-horizontal * rightVector);
         between = between.normalized;
 
         if (!playingAnim || anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == "movement_idle")
@@ -118,10 +120,13 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(Input.GetAxis(verticalInputAxis)) > 0 || Mathf.Abs(Input.GetAxis(horizontalInputAxis)) > 0)
         {
             isMoving = true;
+
+            Debug.Log("is  moving");
         }
         else
         {
             isMoving = false;
+            Debug.Log("is not moving");
         }
 
         anim.SetBool("isMoving", isMoving);
@@ -138,8 +143,37 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Dead");
             this.enabled = false;
         }
+        
+            ActivateRageEffect();
 
-        if ( Input.GetButtonDown(attackInputButton))
+
+
+
+
+        if (Input.GetKey(KeyCode.Z)&&isgrounded==true)
+        {
+            Debug.Log("Pressing Button");
+            anim.SetBool("isBlocking", true);
+            isBlocking = true;
+        }
+        else
+        {
+            Debug.Log("Pressing Button");
+            anim.SetBool("isBlocking", false);
+            isBlocking = false;
+        }
+        if (isPickedUp == true)
+        {
+            anim.SetBool("isCurrentlyPickingUp", true);
+        }
+        if (isPickedUp == false)
+        {
+            anim.SetBool("isCurrentlyPickingUp", false);
+        }
+    
+     
+        
+        if (Input.GetButtonDown(attackInputButton))
         {
             isAttacking = true;
             if (!playingAnim && isGrounded())
@@ -180,45 +214,28 @@ public class PlayerController : MonoBehaviour
                 {
                     attackSeq += 1;
                 }
+              
+            }
+           
+
+            
+        }
+
+
+
+               
+
+
+
+            bool isGrounded()
+            {
+                Debug.DrawRay(transform.position, Vector3.down * 0.1f);
+                return Physics.Raycast(new Vector3(
+                    transform.position.x,
+                    transform.position.y + 0.1f,
+                    transform.position.z), Vector3.down, 0.2f, lyr);
             }
         }
-        if ( Input.GetButton(blockInputButton))
-        {
-            isBlocking = true;
-            anim.SetBool("isBlocking", isBlocking);
-        }
-        else if (isBlocking)
-        {
-            isBlocking = false;
-            anim.SetBool("isBlocking", isBlocking);
-        }
-        if (Input.GetButton(pickupButton))
-        {
-            isPickedUp = true;
-            anim.SetBool("isPickedUp", isPickedUp);
-            Debug.Log("isPickedUp");
-        }
-        if(isPickedUp == true)
-        {
-            isCurrentlyPickingUp = true;
-            anim.SetBool("isCurrentlyPickingUp", isCurrentlyPickingUp);
-        }
-       
-      
-        ActivateRageEffect();
-    }
-   
-
-
-    bool isGrounded()
-    {
-        Debug.DrawRay(transform.position, Vector3.down * 0.1f);
-        return Physics.Raycast(new Vector3(
-            transform.position.x,
-            transform.position.y + 0.1f,
-            transform.position.z), Vector3.down, 0.2f, lyr);
-    }
-
     public void lookto(Vector3 vector3)
     {
         vector3.y = 0;
@@ -314,51 +331,57 @@ public class PlayerController : MonoBehaviour
     }
     public void ActivateRageEffect()
     {
-        if (Input.GetButton(rageEffectButton)&&rage>=100)
+        if (Input.GetButton(rageEffectButton) && rage == 100)
         {
             rageClawEffects[0].SetActive(true);
             rageClawEffects[1].SetActive(true);
             rageClawEffects[2].SetActive(true);
-            isRaging =true;
+            isRaging = true;
             rageSound.Play();
-            
         }
+
         if (isRaging == true)
         {
-            directionalLight.color = Color.black;
-            playerSpeed = 10; 
             smallAttackDamage = rageAttackDamage;
             largeAttackDamage = rageAttackDamage;
+            directionalLight.color = directionalLightColor;
+            playerSpeed = 10;
             rage -= 10 * Time.deltaTime;
-            health += 2 * Time.deltaTime;
-            rageMeter.value = rage;
+            health += 1 * Time.deltaTime;
             healthSlider.value = health;
-          GameManager.instance.RageSlowMotion();
-            GameManager.instance.aud.Pause();
-          //  whisperingRageSounds.Play();
+            rageMeter.value = rage;
+            rage = Mathf.Clamp(rage, 0f, 100f);
+            health = Mathf.Clamp(health, 0f, 100f);
             Debug.Log(rage);
         }
-        if (rage <= 0)
+
+        if (rage == 0)
         {
+            smallAttackDamage = 5;
+            largeAttackDamage = 15;
             playerSpeed = 5;
-            rageMeter.value = rage;
-            isRaging = false;
             rageClawEffects[0].SetActive(false);
             rageClawEffects[1].SetActive(false);
             rageClawEffects[2].SetActive(false);
-            smallAttackDamage = 5;
-            largeAttackDamage = 15;
-           GameManager.instance.RageEndMotion();
-       //     whisperingRageSounds.Stop();
-            directionalLight.color = directionalLightColor;
-            GameManager.instance.aud.UnPause();
+            rageMeter.value = rage;
+            directionalLight.color = normalColor;
+            isRaging = false;
         }
-
     }
+
     public void AddRage()
     {
-        rage += 20;
-        rageMeter.value = rage;
+        rage = Mathf.Clamp(rage, 0f, 100f);
+        if (rage == 100)
+        {
+            rage += 0;
+        }
+        else
+        {
+            rage += 20;
+            rageMeter.value = rage;
+        }
+       
     }
    
     void RestartGame()

@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject fruitEffect;
     public Transform fruitPos;
     private bool hasSpawnedFruit = false;
+    private bool hasSpawnedEnemiesHall = false;
+    private bool hasSpawnedEnemiesPhase2 = false;
     public bool hasSpawnedSecondPlayer = false;
     public Camera[] cameras;
     public bool isInRound1 = false;
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject spawnPlayer2Text,player1Text;
     public GameObject[] phases;
     public GameObject[] doors;
-    public Transform spawnPoint;
+    public Transform[] spawnPoint;
 
     private void Awake()
     {
@@ -100,23 +102,53 @@ public class GameManager : MonoBehaviour
 
 
             case 10:
-
-                if (!hasSpawnedEnemies)
+                if (!hasSpawnedEnemiesHall)
                 {
+                    waves[0].GetComponent<TextMeshProUGUI>().text = "Progress Through the Hall";
+                    waves[0].SetActive(true);
+                    Invoke("DeactivateText", 2f);
                     doors[0].SetActive(false);
                     phases[0].SetActive(true);
-                    enemiesToSpawn = 2;
-                    EnemySpawnerInTransforms(enemiesToSpawn);
-                    hasSpawnedEnemies = true;
+                    gizmosPosition1 = new Vector3(-74.2f, 51.4f, 4f);
+                    Instantiate(enemies[0], spawnPoint[0].position, Quaternion.identity);
+                    Instantiate(enemies[0], spawnPoint[1].position, Quaternion.identity);
+                    GameObject newFruit = Instantiate(fruit, spawnPoint[0].position+new Vector3(5,1,-5f), Quaternion.identity);
+                    hasSpawnedEnemiesHall = true;
+                    hasSpawnedFruit = true;
                 }
-                
-                
-               
                 break;
+                
+                
+                
+             
             case 12:
                 doors[1].SetActive(false);
+                enemiesToSpawn = 7;
+                
+                if (!hasSpawnedEnemiesPhase2)
+                {
+                  
+                   EnemySpawnerPhase2(enemiesToSpawn);
+                    hasSpawnedEnemiesPhase2 = true;
+                }
+                    break;
+            case 19:
+                waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed";
+                waves[0].SetActive(true);
+                doors[2].SetActive(false);
                 break;
             default:
+            case 21:
+                if (!hasSpawnedEnemiesHall)
+                {
+                    Instantiate(enemies[0], spawnPoint[2].position, Quaternion.identity);
+                    Instantiate(enemies[1], spawnPoint[3].position, Quaternion.identity);
+                    Instantiate(fruit, spawnPoint[2].position + new Vector3(5, 1, -5f), Quaternion.identity);
+                }
+                    break;
+
+            case 23:
+              
 
                 break;
         }
@@ -142,12 +174,12 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator EndOfWave1()
     {
-        roundsEffect[1].Play();
+       // roundsEffect[1].Play();
         aud.volume = 0.3f;
-        waves[1].SetActive(true);
+     //   waves[1].SetActive(true);
 
         yield return new WaitForSeconds(3f);
-        waves[1].SetActive(false);
+      //  waves[1].SetActive(false);
         EndWave1();
     }
 
@@ -178,7 +210,7 @@ public class GameManager : MonoBehaviour
 
         return new Vector3(randomX, randomY, randomZ) + offset;
     }
-
+ 
 
     public void EnemySpawner(int numberOfEnemies)
     {
@@ -192,7 +224,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < enemiesClones; i++)
             {
-                GameObject enemy = enemies[Random.Range(0, enemies.Length)];
+                GameObject enemy = enemies[0];
 
                 float offsetX = Random.Range(-4f,4f);
                 float offsetY = Random.Range(-0.5f, 0.5f);
@@ -205,6 +237,32 @@ public class GameManager : MonoBehaviour
 
         }
         
+    }
+    public void EnemySpawnerPhase2(int numberOfEnemies)
+    {
+
+
+
+        int enemiesClones = numberOfEnemies;
+
+
+        if (enemies.Length > 0)
+        {
+            for (int i = 0; i < enemiesClones; i++)
+            {
+                GameObject enemy = enemies[1];
+
+                float offsetX = Random.Range(-4f, 4f);
+                float offsetY = Random.Range(-0.5f, 0.5f);
+                float offsetZ = Random.Range(-4f, 7f);
+
+                Vector3 randomSpawnPoint = GetRandomPointInCube(new Vector3(offsetX, offsetY, offsetZ));
+                Instantiate(enemy, randomSpawnPoint, Quaternion.identity);
+            }
+
+
+        }
+
     }
     public void EnemySpawnerInTransforms(int numberOfEnemies)
     {
@@ -224,18 +282,23 @@ public class GameManager : MonoBehaviour
                 float offsetY = Random.Range(-0.5f, 0.5f);
                 float offsetZ = Random.Range(-2f,2f);
 
-                Transform transformPoint = spawnPoint;
-                Instantiate(enemy, transformPoint.position, Quaternion.identity);
+                Transform transformPoint1 = spawnPoint[0].transform; 
+
+                Instantiate(enemy, transformPoint1.position, Quaternion.identity);
             }
 
 
         }
 
     }
+    public void DeactivateText()
+    {
+        waves[0].SetActive(false);
+    }
     public void PlayStart()
     {
         waves[0].SetActive(true);
-        roundsEffect[0].Play();
+   //     roundsEffect[0].Play();
 
         Invoke("PlayMusic", 3f);
     }
@@ -279,31 +342,16 @@ public class GameManager : MonoBehaviour
 
         GameObject newFruit = Instantiate(fruit, fruitPos.position, Quaternion.identity);
     }
-    public void RageSlowMotion()
-    {
-        if (players[0].GetComponent<PlayerController>().isRaging == true)
-        {
-            foreach (var enemy in enemies)
-            {
-                enemy.GetComponent<Enemy>().speed = 1;
-            }
-        }
-    }
-    public void RageEndMotion()
-    {
-        foreach (var enemy in enemies)
-        {
-            enemy.GetComponent<Enemy>().speed = 4;
-        }
-    
-    }
+
     public void AddRage()
     {
-        if (players[0].GetComponent<PlayerController>().rage < 100 & players[0].GetComponent<PlayerController>().isRaging==false)
-        {
+        if (players[0].GetComponent<PlayerController>().isRaging == false)
+        { 
+
+        
             players[0].GetComponent<PlayerController>().AddRage();
         }
-       
+
     }
     public void FollowSecondPlayer()
     {
@@ -322,5 +370,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
 }
 
