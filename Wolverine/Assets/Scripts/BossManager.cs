@@ -6,28 +6,31 @@ public class BossManager : MonoBehaviour
 {
     public GameObject bombs;
     public GameObject playerBomb;
-    public Transform protectiveWall;
     public Vector3 gizmosCubeSize1 = new Vector3(5f, 5f, 5f);
     public Vector3 gizmosPosition1;
     private PlayerController controller;
+    public GameObject protectiveWall;
+    public GameObject healthSlidrer;
 
     void Start()
     {
         controller = GetComponent<PlayerController>();
         StartCoroutine(BossEnumerator());
         StartCoroutine(SpawnPlayerBomb());
-    }
+        protectiveWall.SetActive(true);
+        healthSlidrer.SetActive(true);
+}
 
     IEnumerator BossEnumerator()
     {
-        protectiveWall.gameObject.SetActive(true);
+      //  protectiveWall.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
 
         float bombDuration = Random.Range(20f, 30f);
         StartCoroutine(DropBombs(bombDuration));
 
         yield return new WaitForSeconds(bombDuration);
-        protectiveWall.gameObject.SetActive(false);
+    //    protectiveWall.gameObject.SetActive(false);
     }
 
     IEnumerator DropBombs(float duration)

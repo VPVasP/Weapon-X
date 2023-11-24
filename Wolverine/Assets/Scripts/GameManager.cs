@@ -25,7 +25,12 @@ public class GameManager : MonoBehaviour
     private bool hasSpawnedFruit = false;
     private bool hasSpawnedEnemiesHall = false;
     private bool hasSpawnedEnemiesPhase2 = false;
+    private bool hasSpawnedEnemiesHall2 = false;
+    private bool hasDoneCase21 = false;
     public bool hasSpawnedSecondPlayer = false;
+    public bool isInPhase1=false;
+   public bool isInPhase2 = false;
+   public bool isInPhase3 = false;
     public Camera[] cameras;
     public bool isInRound1 = false;
     public bool isInRound2 = false;
@@ -46,7 +51,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] phases;
     public GameObject[] doors;
     public Transform[] spawnPoint;
-
+    public BossManager bossManager;
+    public Transform[] reSpawnPoints;
     private void Awake()
     {
         instance = this;
@@ -67,6 +73,11 @@ public class GameManager : MonoBehaviour
         spawnPlayer2Text.SetActive(true);
         doors[0].SetActive(true);
         phases[0].SetActive(false);
+        bossManager = FindObjectOfType<BossManager>();
+        bossManager.enabled = false;
+        isInPhase1 = true;
+        isInPhase2 = false;
+        isInPhase3 = false;
     }
 
 
@@ -124,7 +135,8 @@ public class GameManager : MonoBehaviour
             case 12:
                 doors[1].SetActive(false);
                 enemiesToSpawn = 7;
-                
+                isInPhase1 = false;
+                isInPhase2 = true;
                 if (!hasSpawnedEnemiesPhase2)
                 {
                   
@@ -134,22 +146,32 @@ public class GameManager : MonoBehaviour
                     break;
             case 19:
                 waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed";
+
                 waves[0].SetActive(true);
+               Invoke("DeactivateTextSecond", 2f);
                 doors[2].SetActive(false);
-                break;
-            default:
-            case 21:
-                if (!hasSpawnedEnemiesHall)
+              //  doors[3].GetComponent<MeshRenderer>().enabled = true;
+                if (!hasSpawnedEnemiesHall2)
                 {
                     Instantiate(enemies[0], spawnPoint[2].position, Quaternion.identity);
                     Instantiate(enemies[1], spawnPoint[3].position, Quaternion.identity);
-                    Instantiate(fruit, spawnPoint[2].position + new Vector3(5, 1, -5f), Quaternion.identity);
+                    hasSpawnedEnemiesHall2 = true;
                 }
-                    break;
+                break;
+          
+            case 21:
+                isInPhase2 = false;
+                isInPhase3 = true;
+                if (!hasDoneCase21)
+                {
+                    doors[3].GetComponent<DoorBeforeBoss>().DisableMeshAndTrigger();
+                    bossManager.enabled = true;
+                    hasDoneCase21= true;
+                }
+                break;
 
             case 23:
-              
-
+             
                 break;
         }
         if (Input.GetKeyDown(KeyCode.B) && !hasSpawnedSecondPlayer)
@@ -292,6 +314,10 @@ public class GameManager : MonoBehaviour
 
     }
     public void DeactivateText()
+    {
+        waves[0].SetActive(false);
+    }
+    public void DeactivateTextSecond()
     {
         waves[0].SetActive(false);
     }

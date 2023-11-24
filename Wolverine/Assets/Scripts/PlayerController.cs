@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public bool isBlocking = false;
     public bool isCurrentlyPickingUp = false;
     public bool isRaging = false;
+    public bool isThrowing = false;
+    public bool isRunningWithPickUp =false;
     public string horizontalInputAxis;
     public string verticalInputAxis;
     public string jumpInputButton;
@@ -162,14 +164,30 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isBlocking", false);
             isBlocking = false;
         }
-        if (isPickedUp == true)
+        if (isCurrentlyPickingUp == true)
         {
-            anim.SetBool("isCurrentlyPickingUp", true);
+            anim.SetTrigger("PickingUpTrigger");
+            isPickedUp = true;
+            Debug.Log("Played Anim");
         }
-        if (isPickedUp == false)
+        if(isPickedUp == true)
         {
-            anim.SetBool("isCurrentlyPickingUp", false);
+            float moveInput = Mathf.Abs(Input.GetAxis(verticalInputAxis)) + Mathf.Abs(Input.GetAxis(horizontalInputAxis));
+            anim.SetBool("isRunningWithPickUp", moveInput > 0);
+            anim.SetBool("isPickedUp", moveInput <= 0);
+            anim.SetBool("isPickedUp", true);
+            isCurrentlyPickingUp = false;
+            isAttacking = false;
+            
         }
+ 
+        if(isThrowing == true)
+        {
+            anim.SetBool("isRunningWithPickUp",false);
+            anim.SetTrigger("Throwing");
+            isPickedUp = false;
+        }
+    
     
      
         
@@ -320,15 +338,37 @@ public class PlayerController : MonoBehaviour
             health -= damage;
             healthSlider.value = health;
             hurtSound.Play();
-            if (health <= 0)
+            if (health <= 0 && GameManager.instance.isInPhase1 == true)
             {
-                isDead = true;
+                this.transform.localPosition = GameManager.instance.reSpawnPoints[0].position;
                 deadAudio.Play();
-                Invoke("RestartGame", 4f);
-               
+                health = 100;
+                healthSlider.value = health;
+
+
+
+                if (health <= 0 && GameManager.instance.isInPhase2 == true)
+                {
+                    this.transform.localPosition = GameManager.instance.reSpawnPoints[1].position;
+                    deadAudio.Play();
+                    health = 100;
+                    healthSlider.value = health;
+
+
+                }
             }
         }
+        if (health <= 0 && GameManager.instance.isInPhase3 == true)
+        {
+            this.transform.localPosition = GameManager.instance.reSpawnPoints[2].position;
+            deadAudio.Play();
+            health = 100;
+            healthSlider.value = health;
+
+
+        }
     }
+
     public void ActivateRageEffect()
     {
         if (Input.GetButton(rageEffectButton) && rage == 100)
