@@ -17,6 +17,7 @@ public class Bomb : MonoBehaviour
         {
 
             collision.gameObject.GetComponent<PlayerController>().health -= 10;
+            collision.gameObject.GetComponent<PlayerController>().hurtSound.Play();
             collision.gameObject.GetComponent<PlayerController>().healthSlider.value = collision.gameObject.GetComponent<PlayerController>().health;
             collision.gameObject.GetComponent<Animator>().SetTrigger("DamageSmall");
             GameObject theDeathEffect = Instantiate(bombEffect, transform.position, Quaternion.identity);
@@ -27,6 +28,9 @@ public class Bomb : MonoBehaviour
 
             collision.gameObject.GetComponent<Enemy>().health -= 10;
             collision.gameObject.GetComponent<Animator>().SetTrigger("damageSmall");
+
+          
+
             GameObject theDeathEffect = Instantiate(bombEffect, transform.position, Quaternion.identity);
             Destroy(gameObject, 0.3f);
         }

@@ -11,7 +11,8 @@ public class BossManager : MonoBehaviour
     private PlayerController controller;
     public GameObject protectiveWall;
     public GameObject healthSlidrer;
-
+    public GameObject[] enemies;
+    public bool hasSpawnedEnemies=false;
     void Start()
     {
         controller = GetComponent<PlayerController>();
@@ -21,7 +22,7 @@ public class BossManager : MonoBehaviour
         healthSlidrer.SetActive(true);
 }
 
-    IEnumerator BossEnumerator()
+  public  IEnumerator BossEnumerator()
     {
       //  protectiveWall.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
@@ -30,12 +31,17 @@ public class BossManager : MonoBehaviour
         StartCoroutine(DropBombs(bombDuration));
 
         yield return new WaitForSeconds(bombDuration);
-    //    protectiveWall.gameObject.SetActive(false);
+        hasSpawnedEnemies = false;
+        //    protectiveWall.gameObject.SetActive(false);
     }
 
-    IEnumerator DropBombs(float duration)
+  
+   IEnumerator DropBombs(float duration)
     {
-        while (duration > 0)
+        float randomEnemies = Random.Range(3f, 8f);
+        EnemySpawner(randomEnemies);
+       
+        while (duration > 0 && !hasSpawnedEnemies)
         {
             float offsetX = Random.Range(-5f, 5f);
             float offsetY = Random.Range(-0.5f, 0.5f);
@@ -44,12 +50,12 @@ public class BossManager : MonoBehaviour
             GameObject theBombs = Instantiate(bombs, randomSpawnPoint, Quaternion.identity);
 
             yield return new WaitForSeconds(1f);
-
             duration -= 1f;
         }
+
     }
 
-    IEnumerator SpawnPlayerBomb()
+   public IEnumerator SpawnPlayerBomb()
     {
         yield return new WaitForSeconds(Random.Range(3f, 20f));
 
@@ -77,6 +83,32 @@ public class BossManager : MonoBehaviour
         float randomZ = Random.Range(cubeCenter.z - cubeExtents.z, cubeCenter.z + cubeExtents.z);
 
         return new Vector3(randomX, randomY, randomZ) + offset;
+    }
+    public void EnemySpawner(float numberOfEnemies)
+    {
+
+
+
+        float enemiesClones = numberOfEnemies;
+
+
+        if (enemies.Length > 0)
+        {
+            for (int i = 0; i < enemiesClones; i++)
+            {
+                GameObject enemy = enemies[0];
+
+                float offsetX = Random.Range(-4f, 4f);
+                float offsetY = Random.Range(-0.5f, 0.5f);
+                float offsetZ = Random.Range(-4f, 7f);
+
+                Vector3 randomSpawnPoint = GetRandomPointInCube(new Vector3(offsetX, offsetY, offsetZ));
+                Instantiate(enemy, randomSpawnPoint, Quaternion.identity);
+            }
+
+
+        }
+
     }
 }
 

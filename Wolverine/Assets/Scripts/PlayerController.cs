@@ -345,29 +345,31 @@ public class PlayerController : MonoBehaviour
                 health = 100;
                 healthSlider.value = health;
 
+            }
+
+            if (health <= 0 && GameManager.instance.isInPhase2 == true)
+            {
+                this.transform.localPosition = GameManager.instance.reSpawnPoints[1].position;
+                deadAudio.Play();
+                health = 100;
+                healthSlider.value = health;
 
 
-                if (health <= 0 && GameManager.instance.isInPhase2 == true)
-                {
-                    this.transform.localPosition = GameManager.instance.reSpawnPoints[1].position;
-                    deadAudio.Play();
-                    health = 100;
-                    healthSlider.value = health;
+            }
 
 
-                }
+            if (health <= 0 && GameManager.instance.isInPhase3 == true)
+            {
+                this.transform.localPosition = GameManager.instance.reSpawnPoints[2].position;
+                deadAudio.Play();
+                health = 100;
+                healthSlider.value = health;
+
+
             }
         }
-        if (health <= 0 && GameManager.instance.isInPhase3 == true)
-        {
-            this.transform.localPosition = GameManager.instance.reSpawnPoints[2].position;
-            deadAudio.Play();
-            health = 100;
-            healthSlider.value = health;
-
-
-        }
     }
+    
 
     public void ActivateRageEffect()
     {

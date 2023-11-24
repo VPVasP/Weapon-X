@@ -1218,17 +1218,17 @@ PrefabInstance:
     - target: {fileID: 3112893264200181395, guid: 4497437f2c8eaa34b8bc293773904d9d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 14.555591
+      value: 16.137827
       objectReference: {fileID: 0}
     - target: {fileID: 3112893264200181395, guid: 4497437f2c8eaa34b8bc293773904d9d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.546537
+      value: 8.644524
       objectReference: {fileID: 0}
     - target: {fileID: 3112893264200181395, guid: 4497437f2c8eaa34b8bc293773904d9d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.1603088
+      value: 4.2277
       objectReference: {fileID: 0}
     - target: {fileID: 3112893264200181395, guid: 4497437f2c8eaa34b8bc293773904d9d,
         type: 3}
@@ -1238,7 +1238,7 @@ PrefabInstance:
     - target: {fileID: 3112893264200181395, guid: 4497437f2c8eaa34b8bc293773904d9d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.009701
+      value: -5.1468
       objectReference: {fileID: 0}
     - target: {fileID: 3112893264200181395, guid: 4497437f2c8eaa34b8bc293773904d9d,
         type: 3}
@@ -1308,6 +1308,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6053771845067770069, guid: 1aa40f61b9dff8243a113cb21796b3fc, type: 3}
+--- !u!65 &169811628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169811624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7908738, y: 0.10680313, z: 2.7646031}
+  m_Center: {x: 0.0000005364418, y: 0.0483823, z: 0.022968888}
 --- !u!1 &177495888
 GameObject:
   m_ObjectHideFlags: 0
@@ -4916,7 +4929,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 8529431810903883886, guid: 1a47c729cca0b134dbba329be34e7f59, type: 3}
   - {fileID: 8529431810903883886, guid: c73d19afc0fe5484687464b464677c2a, type: 3}
-  gizmosCubeSize1: {x: 38.6, y: 1, z: 21.25}
+  gizmosCubeSize1: {x: 34.86, y: 1, z: 15.4}
   gizmosPosition1: {x: -74.63, y: 51.4, z: -70}
   enemiesToSpawn: 0
   EndCanvas: {fileID: 0}
@@ -5094,6 +5107,9 @@ MonoBehaviour:
   gizmosPosition1: {x: -74.63, y: 65.53, z: 73}
   protectiveWall: {fileID: 1493878827}
   healthSlidrer: {fileID: 1139013844}
+  enemies:
+  - {fileID: 8529431810903883886, guid: 1a47c729cca0b134dbba329be34e7f59, type: 3}
+  hasSpawnedEnemies: 0
 --- !u!1001 &493388806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10764,6 +10780,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1465401696}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1139013845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3065679296281912865, guid: 3c6dbc4ec6d65a640a9622b4134eca30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1465401696}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139013844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1139013846 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3065679296281912866, guid: 3c6dbc4ec6d65a640a9622b4134eca30,
@@ -13896,6 +13924,7 @@ GameObject:
   - component: {fileID: 1493878831}
   - component: {fileID: 1493878830}
   - component: {fileID: 1493878829}
+  - component: {fileID: 1493878832}
   m_Layer: 0
   m_Name: ProtectiveWall
   m_TagString: ProtectiveWall
@@ -13981,6 +14010,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493878827}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1493878832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493878827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ff0ce30558ab4469bdaa4045e5cc44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallHealthSlider: {fileID: 1139013845}
+  wallHealth: 0
 --- !u!1 &1528727990
 GameObject:
   m_ObjectHideFlags: 0

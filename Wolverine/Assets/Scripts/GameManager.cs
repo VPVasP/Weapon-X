@@ -145,14 +145,15 @@ public class GameManager : MonoBehaviour
                 }
                     break;
             case 19:
-                waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed";
-
-                waves[0].SetActive(true);
-               Invoke("DeactivateTextSecond", 2f);
+               
                 doors[2].SetActive(false);
               //  doors[3].GetComponent<MeshRenderer>().enabled = true;
                 if (!hasSpawnedEnemiesHall2)
                 {
+                    waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed";
+
+                    waves[0].SetActive(true);
+                    Invoke("DeactivateTextSecond", 2f);
                     Instantiate(enemies[0], spawnPoint[2].position, Quaternion.identity);
                     Instantiate(enemies[1], spawnPoint[3].position, Quaternion.identity);
                     hasSpawnedEnemiesHall2 = true;
