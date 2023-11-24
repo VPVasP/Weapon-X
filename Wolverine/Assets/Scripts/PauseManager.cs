@@ -10,11 +10,7 @@ public class PauseManager : MonoBehaviour
     public AudioSource ourMusic;
     public AudioSource pauseMusic;
     public GameObject pauseMenu;
-    public AudioSource myFX;
-    public AudioClip hoverOverFX;
-    public AudioClip clickFX;
-    [SerializeField] Slider volumeSlider;
-    public TextMeshProUGUI dropdownText;
+    public GameObject controlMenu;
     public static PauseManager instance;
     public bool isPaused;
     private void Awake()
@@ -22,26 +18,7 @@ public class PauseManager : MonoBehaviour
         instance = this;
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        if (!PlayerPrefs.HasKey("musicVolume"))
-        {
-            PlayerPrefs.SetFloat("musicVolume", 1);
-            LoadVolume();
-        }
-        else
-        {
-            LoadVolume();
-        }
-    }
-    public void HoverSound()
-    {
-        myFX.PlayOneShot(hoverOverFX);
-    }
-    public void ClickSound()
-    {
-        myFX.PlayOneShot(clickFX);
-    }
+  
     public void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -59,6 +36,17 @@ public class PauseManager : MonoBehaviour
         pauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
     }
+    public void ControlsMenu()
+    {
+        controlMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+    public void MainMenuButtons()
+    {
+
+        controlMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
     public void RestartLevel()
     {
         GameManager.instance.Restart();
@@ -74,30 +62,11 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
     }
   
-    public void ChangeVolume()
-    {
-        AudioListener.volume = volumeSlider.value;
-        SaveVolume();
-    }
-    public void LoadVolume()
-    {
-        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
-    }
-    public void SaveVolume()
-    {
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    }
+  
     public void ExitGame()
     {
         Application.Quit();
     }
    
-    public void WindowedMode()
-    {
-        Screen.fullScreenMode = FullScreenMode.Windowed;
-    }
-    public void FullWindow()
-    {
-        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-    }
+  
 }
