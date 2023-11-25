@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     public GameObject endingCamera;
     public GameObject endingCanvas;
     private Transform mainCameraTransform;
+    public GameObject wilsonFiskDialogue;
     private void Awake()
     {
         instance = this;
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
         endingText.gameObject.SetActive(false);
         mainCameraTransform = Camera.main.transform;
         endingCanvas.SetActive(false);
+        wilsonFiskDialogue.SetActive(false);
     }
 
 
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
                 {
                     waves[0].GetComponent<TextMeshProUGUI>().text = "Progress Through the Hall";
                     waves[0].SetActive(true);
-                    Invoke("DeactivateText", 2f);
+                    Invoke("DeactivateText", 3f);
                     doors[0].SetActive(false);
                     phases[0].SetActive(true);
                     gizmosPosition1 = new Vector3(-74.2f, 51.4f, 4f);
@@ -161,9 +163,10 @@ public class GameManager : MonoBehaviour
                 if (!hasSpawnedEnemiesHall2)
                 {
                     waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed,Boss fight after this Hall";
-
+                    wilsonFiskDialogue.SetActive(true);
+                    wilsonFiskDialogue.GetComponentInChildren<TextMeshProUGUI>().text = "Wilson Fisk " + "Logan,how dare you come here?!GET HIM!";
                     waves[0].SetActive(true);
-                    Invoke("DeactivateTextSecond", 2f);
+                    Invoke("DeactivateTextSecond", 5f);
                     Instantiate(enemies[0], spawnPoint[2].position, Quaternion.identity);
                     Instantiate(enemies[1], spawnPoint[3].position, Quaternion.identity);
                     hasSpawnedEnemiesHall2 = true;
@@ -180,7 +183,7 @@ public class GameManager : MonoBehaviour
                     waves[0].GetComponent<TextMeshProUGUI>().text = "Find the real bomb and throw it in the wall,Good luck surviving";
 
                     waves[0].SetActive(true);
-                    Invoke("DeactivateTextSecond", 2f);
+                    Invoke("DeactivateTextSecond", 5f);
                     doors[3].GetComponent<DoorBeforeBoss>().DisableMeshAndTrigger();
                     bossManager.enabled = true;
                     hasDoneCase21= true;
@@ -337,6 +340,7 @@ public class GameManager : MonoBehaviour
     public void DeactivateTextSecond()
     {
         waves[0].SetActive(false);
+        wilsonFiskDialogue.SetActive(false);
     }
     public void PlayStart()
     {

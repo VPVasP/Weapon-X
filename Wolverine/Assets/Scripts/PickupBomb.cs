@@ -12,13 +12,15 @@ public class PickupBomb : MonoBehaviour
     public PlayerController controller;
     public BossManager bossManager;
     public Enemy[] enemy;
+    public string[] wilsonFiskSentences;
+    private AudioSource boomSound;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         controller = FindObjectOfType<PlayerController>();
         bossManager = FindObjectOfType<BossManager>();
         enemy = FindObjectsOfType<Enemy>();
-      
+        boomSound = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -48,6 +50,10 @@ public class PickupBomb : MonoBehaviour
             this.GetComponent<Renderer>().enabled = false;
             this.GetComponent<BoxCollider>().enabled = false;
             this.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+            GameManager.instance.wilsonFiskDialogue.SetActive(true);
+            GameManager.instance.wilsonFiskDialogue.GetComponentInChildren<TextMeshProUGUI>().text ="WILSON FISK " +wilsonFiskSentences[Random.Range(0, wilsonFiskSentences.Length)];
+            Invoke("DisableWilsonFiskDialogue", 3f);
+            boomSound.Play();
             Debug.Log("HitWall");
         }
         if (collision.gameObject.CompareTag("Ground"))
@@ -57,7 +63,10 @@ public class PickupBomb : MonoBehaviour
             Debug.Log("HitFloor");
         }
     }
-
+    public void DisableWilsonFiskDialogue()
+    {
+        GameManager.instance.wilsonFiskDialogue.SetActive(false);
+    }
     private void Update()
     {
 

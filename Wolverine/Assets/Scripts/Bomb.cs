@@ -11,7 +11,9 @@ public class Bomb : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             GameObject theDeathEffect = Instantiate(bombEffect, transform.position, Quaternion.identity);
+            Destroy(theDeathEffect, 0.3f);
             Destroy(gameObject,0.3f);
+            
         }
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -20,7 +22,8 @@ public class Bomb : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().hurtSound.Play();
             collision.gameObject.GetComponent<PlayerController>().healthSlider.value = collision.gameObject.GetComponent<PlayerController>().health;
             collision.gameObject.GetComponent<Animator>().SetTrigger("DamageSmall");
-            GameObject theDeathEffect = Instantiate(bombEffect, transform.position, Quaternion.identity);
+            GameObject theDeathEffect = Instantiate(bombEffect, transform.position, Quaternion.identity); 
+            Destroy(theDeathEffect, 0.3f);
             Destroy(this.gameObject, 0.3f);
         }
         if (collision.gameObject.CompareTag("Enemy"))
@@ -32,6 +35,7 @@ public class Bomb : MonoBehaviour
           
 
             GameObject theDeathEffect = Instantiate(bombEffect, transform.position, Quaternion.identity);
+            Destroy(theDeathEffect, 0.3f);
             Destroy(gameObject, 0.3f);
         }
     }
