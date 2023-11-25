@@ -76,8 +76,7 @@ public class PickupBomb : MonoBehaviour
             foreach (Enemy enemyInstance in enemy)
             {
                 if (enemyInstance.isPickedUpEnemyAttack)
-                {
-                    isPickedUp = false;
+                { 
                   
                     rb.constraints = RigidbodyConstraints.None;
                     float forcePower = 5f;

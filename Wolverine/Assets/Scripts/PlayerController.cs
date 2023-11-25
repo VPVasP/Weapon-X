@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.Experimental.GlobalIllumination;
-using Mono.Cecil;
+//using Mono.Cecil;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public bool isRunningWithPickUp =false;
     public bool isHurt = false;
     public bool isJumping = false;
+    public bool isEndCheering = false;
     public string horizontalInputAxis;
     public string verticalInputAxis;
     public string jumpInputButton;
@@ -199,7 +200,10 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Throwing");
             isPickedUp = false;
         }
-    
+        if (isEndCheering == true)
+        {
+            anim.SetBool("isEnding", true);
+        }
     
      
         

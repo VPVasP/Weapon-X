@@ -47,12 +47,18 @@ public class GameManager : MonoBehaviour
     public Transform secondPlayer;
     public Slider secondPlayerSlider;
     public int secondPlayerHealth;
-    public GameObject spawnPlayer2Text,player1Text;
+  //  public GameObject spawnPlayer2Text,player1Text;
     public GameObject[] phases;
     public GameObject[] doors;
     public Transform[] spawnPoint;
     public BossManager bossManager;
     public Transform[] reSpawnPoints;
+    public Transform endingPosition;
+    public TextMeshProUGUI endingText;
+    public AudioSource endingMusic;
+    public GameObject endingCamera;
+    public GameObject endingCanvas;
+    private Transform mainCameraTransform;
     private void Awake()
     {
         instance = this;
@@ -70,7 +76,7 @@ public class GameManager : MonoBehaviour
         enemiesToSpawn = 3;
         EnemySpawner(enemiesToSpawn);
         secondPlayerSlider.gameObject.SetActive(false);
-        spawnPlayer2Text.SetActive(true);
+      //  spawnPlayer2Text.SetActive(true);
         doors[0].SetActive(true);
         phases[0].SetActive(false);
         bossManager = FindObjectOfType<BossManager>();
@@ -78,6 +84,10 @@ public class GameManager : MonoBehaviour
         isInPhase1 = true;
         isInPhase2 = false;
         isInPhase3 = false;
+        endingCamera.SetActive(false);
+        endingText.gameObject.SetActive(false);
+        mainCameraTransform = Camera.main.transform;
+        endingCanvas.SetActive(false);
     }
 
 
@@ -181,25 +191,25 @@ public class GameManager : MonoBehaviour
              
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.B) && !hasSpawnedSecondPlayer)
-        {
+        //if (Input.GetKeyDown(KeyCode.B) && !hasSpawnedSecondPlayer)
+        //{
 
             
-            secondPlayer.gameObject.SetActive(true);
-            secondPlayerSlider.gameObject.SetActive(true);
-            cameras[1].gameObject.SetActive(true);
+        //    secondPlayer.gameObject.SetActive(true);
+        //    secondPlayerSlider.gameObject.SetActive(true);
+        //    cameras[1].gameObject.SetActive(true);
 
-            player1Text.SetActive(true);
-            secondPlayerSlider.value = secondPlayerHealth;
+        //    player1Text.SetActive(true);
+        //    secondPlayerSlider.value = secondPlayerHealth;
 
-            spawnPlayer2Text.SetActive(false);
-            hasSpawnedSecondPlayer = true;
+        //    spawnPlayer2Text.SetActive(false);
+        //    hasSpawnedSecondPlayer = true;
 
-        }
-        if (hasSpawnedSecondPlayer == true)
-        {
-            FollowSecondPlayer();
-        }
+        //}
+        //if (hasSpawnedSecondPlayer == true)
+        //{
+        //    FollowSecondPlayer();
+        //}
     }
     IEnumerator EndOfWave1()
     {
@@ -338,8 +348,15 @@ public class GameManager : MonoBehaviour
 
     public void PlayClose()
     {
-        endText.SetActive(true);
-        Invoke("Close", 5f);
+        endingCanvas.SetActive(true);
+        players[0].transform.localPosition = endingPosition.position;
+        endingCamera.SetActive(true);
+        mainCameraTransform.gameObject.SetActive(false);
+        endingText.text ="Total Enemies Killed " + enemiesKilled.ToString();
+        endingMusic.Play();
+        aud.Stop();
+        players[0].GetComponent<PlayerController>().isEndCheering = true;
+        players[0].gameObject.layer = LayerMask.NameToLayer("EndingUI");
     }
     public void PlayEnd()
     {

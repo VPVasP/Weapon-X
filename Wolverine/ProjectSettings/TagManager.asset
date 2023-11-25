@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - ProtectiveWall
   - Boss
+  - Player2
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - SecondPlayer
   - Wolverine
   - Enemy
-  - 
+  - EndingUI
   - 
   - 
   - 
