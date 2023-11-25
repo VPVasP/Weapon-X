@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public string rageEffectButton;
     public string playerIdentifier;
     public GameObject[] rageClawEffects;
+    public GameObject[] normalClawEffects;
     public Light directionalLight;
     public Color directionalLightColor;
     public Color normalColor;
@@ -72,6 +73,8 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         healthSlider.value = health;
         rageMeter.value = rage;
+        normalClawEffects[0].SetActive(false);
+        normalClawEffects[1].SetActive(false);
         rageClawEffects[0].SetActive(false);
         rageClawEffects[1].SetActive(false);
         rageClawEffects[2].SetActive(false);
@@ -210,8 +213,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown(attackInputButton))
         {
             isAttacking = true;
+            normalClawEffects[0].SetActive(true);
+            normalClawEffects[1].SetActive(true);
 
-           
             if (!playingAnim && isGrounded())
             {
                 playingAnim = true;
@@ -293,6 +297,7 @@ public class PlayerController : MonoBehaviour
                         {
                             if (!enemy.GetComponent<Enemy>().isDead)
                             {
+                               
                                 enemy.GetComponent<Enemy>().health -= largeAttackDamage;
                                 enemy.GetComponent<Rigidbody>().AddForce(vector3.normalized * pushPower, ForceMode.Impulse);
                                 enemy.GetComponent<Rigidbody>().AddForce(Vector3.up * 8f, ForceMode.Impulse);
@@ -308,12 +313,14 @@ public class PlayerController : MonoBehaviour
                                 enemy.GetComponent<Enemy>().health -= smallAttackDamage;
                                 enemy.GetComponent<Animator>().SetTrigger("DamageSmall");
                                 Debug.Log(enemy.GetComponent<Enemy>().health);
+                                
                             }
                         }
                         var Rot = Quaternion.LookRotation(transform.position - enemy.transform.position);
                     }
                     else
                     {
+                      
                         if (!enemy.GetComponent<Enemy>().playedDead)
                         {
                             enemy.GetComponent<Enemy>().playedDead = true;
@@ -399,6 +406,9 @@ public class PlayerController : MonoBehaviour
             rageClawEffects[0].SetActive(true);
             rageClawEffects[1].SetActive(true);
             rageClawEffects[2].SetActive(true);
+            normalClawEffects[0].SetActive(false);
+            normalClawEffects[1].SetActive(false);
+
             isRaging = true;
             rageSound.Play();
             GameManager.instance.aud.Pause();
@@ -417,6 +427,8 @@ public class PlayerController : MonoBehaviour
             rage = Mathf.Clamp(rage, 0f, 100f);
             health = Mathf.Clamp(health, 0f, 100f);
             Debug.Log(rage);
+            normalClawEffects[0].SetActive(false);
+            normalClawEffects[1].SetActive(false);
         }
 
         if (rage == 0)
