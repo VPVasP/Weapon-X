@@ -43,6 +43,10 @@ public class FruitSnack : MonoBehaviour
         {
             isFollowingPlayer = true;
         }
+        if(player.GetComponent<PlayerController>().health == 100)
+        {
+            isFollowingPlayer = false;
+        }
         if (isFollowingPlayer)
         {
             Vector3 direction = player.transform.position - transform.position;
