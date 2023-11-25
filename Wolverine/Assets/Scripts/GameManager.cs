@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
               //  doors[3].GetComponent<MeshRenderer>().enabled = true;
                 if (!hasSpawnedEnemiesHall2)
                 {
-                    waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed";
+                    waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed,Boss fight after this Hall";
 
                     waves[0].SetActive(true);
                     Invoke("DeactivateTextSecond", 2f);
@@ -163,8 +163,14 @@ public class GameManager : MonoBehaviour
             case 21:
                 isInPhase2 = false;
                 isInPhase3 = true;
+              
+              
                 if (!hasDoneCase21)
                 {
+                    waves[0].GetComponent<TextMeshProUGUI>().text = "Find the real bomb and throw it in the wall,Good luck surviving";
+
+                    waves[0].SetActive(true);
+                    Invoke("DeactivateTextSecond", 2f);
                     doors[3].GetComponent<DoorBeforeBoss>().DisableMeshAndTrigger();
                     bossManager.enabled = true;
                     hasDoneCase21= true;

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    public List<Transform> target = new List<Transform>(); // Change from array to List
+    public List<Transform> target = new List<Transform>(); 
     public float activateDis;
     public Animator anim;
     public bool isAsleep = true;
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
     private bool hasPlayedEnemyDeathAudio = false;
     private bool hasPlayedMainMusic = false;
     private bool hasAddedSecondPlayer = false;
+    public bool isPickedUpEnemyAttack = false;
     public GameObject deathEffect;
 
     void Start()
@@ -195,6 +197,8 @@ public class Enemy : MonoBehaviour
             playerToEnemy.y = 0;
             Vector3 localF = transform.GetChild(0).forward;
 
+            GameObject player = targetPlayer.gameObject;
+
             if (playerToEnemy.magnitude <= 3)
             {
                 float angle = Vector3.Angle(localF, playerToEnemy);
@@ -202,8 +206,6 @@ public class Enemy : MonoBehaviour
 
                 if (angle < 90)
                 {
-                    GameObject player = targetPlayer.gameObject;
-
                     aud.clip = attackClip[Random.Range(0, attackClip.Length)];
                     aud.Play();
 
@@ -225,9 +227,11 @@ public class Enemy : MonoBehaviour
                                 player.GetComponent<PlayerController>().TakeDamage(randomDamage);
 
                                 player.GetComponent<Animator>().SetTrigger("DamageSmall");
+
                                 player.GetComponent<PlayerController>().playingAnim = false;
                                 player.GetComponent<AudioSource>().clip = player.GetComponent<PlayerController>().damageAudio;
                                 player.GetComponent<AudioSource>().Play();
+                                //   player.GetComponent<PlayerController>().isHurt = true;
                                 var rotation = Quaternion.LookRotation(transform.position - player.transform.position);
                             }
                             else if (!player.GetComponent<PlayerController>().isDead && player.GetComponent<PlayerController>().isBlocking)
@@ -236,21 +240,30 @@ public class Enemy : MonoBehaviour
                                 player.GetComponent<Rigidbody>().AddForce(backwardForce, ForceMode.Impulse);
                                 int blockDamage = Random.Range(1, 4);
                                 player.GetComponent<PlayerController>().TakeDamage(blockDamage);
+                                player.GetComponent<PlayerController>().isHurt = false;
                             }
                             else
                             {
                                 if (!player.GetComponent<PlayerController>().isDeadAnimation)
                                 {
                                     startMove = false;
+
                                     player.GetComponent<Rigidbody>().AddForce(playerToEnemyNormalized * 2f, ForceMode.Impulse);
                                 }
                             }
+                                if (player.GetComponent<PlayerController>().isPickedUp == true)
+                                {
+                                    isPickedUpEnemyAttack = true;
+}
+
+                            }
+
                         }
                     }
                 }
             }
+
         }
-    }
 
     Transform findBothPlayers()
     {

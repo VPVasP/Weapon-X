@@ -21,9 +21,12 @@ public class PauseManager : MonoBehaviour
   
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) && isPaused==false)
         {
             Pause();
+        }
+        else if(Input.GetKey(KeyCode.Escape) && isPaused==true){
+            Resume();
         }
     }
 

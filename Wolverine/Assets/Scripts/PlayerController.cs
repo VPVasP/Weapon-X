@@ -43,13 +43,15 @@ public class PlayerController : MonoBehaviour
     public bool playingAnim;
     public Slider healthSlider;
     public Slider rageMeter;
-    public AudioSource deadAudio, hurtSound,rageSound,whisperingRageSounds;
+    public AudioSource deadAudio, hurtSound,rageSound,whisperingRageSounds,blockSound;
     public bool isAttacking = false;
     public bool isBlocking = false;
     public bool isCurrentlyPickingUp = false;
     public bool isRaging = false;
     public bool isThrowing = false;
     public bool isRunningWithPickUp =false;
+    public bool isHurt = false;
+    public bool isJumping = false;
     public string horizontalInputAxis;
     public string verticalInputAxis;
     public string jumpInputButton;
@@ -117,6 +119,7 @@ public class PlayerController : MonoBehaviour
             aud.clip = Jump[Random.Range(0, Jump.Length)];
             aud.Play();
             this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isJumping = true;
         }
 
         if (Mathf.Abs(Input.GetAxis(verticalInputAxis)) > 0 || Mathf.Abs(Input.GetAxis(horizontalInputAxis)) > 0)
@@ -124,6 +127,7 @@ public class PlayerController : MonoBehaviour
             isMoving = true;
 
             Debug.Log("is  moving");
+            isBlocking =false;
         }
         else
         {
@@ -152,17 +156,25 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.Z)&&isgrounded==true)
+        if (Input.GetMouseButton(1)&&isgrounded==true)
         {
             Debug.Log("Pressing Button");
             anim.SetBool("isBlocking", true);
             isBlocking = true;
         }
-        else
+        else if(Input.GetMouseButtonUp(1)&&isgrounded==true)
         {
             Debug.Log("Pressing Button");
             anim.SetBool("isBlocking", false);
             isBlocking = false;
+        }
+        if (isMoving == true)
+        {
+            anim.SetBool("isBlocking", false);
+        }
+        if(isJumping == true)
+        {
+            anim.SetBool("isBlocking", false);
         }
         if (isCurrentlyPickingUp == true)
         {
@@ -194,6 +206,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown(attackInputButton))
         {
             isAttacking = true;
+
+           
             if (!playingAnim && isGrounded())
             {
                 playingAnim = true;
@@ -238,13 +252,6 @@ public class PlayerController : MonoBehaviour
 
             
         }
-
-
-
-               
-
-
-
             bool isGrounded()
             {
                 Debug.DrawRay(transform.position, Vector3.down * 0.1f);
@@ -264,7 +271,7 @@ public class PlayerController : MonoBehaviour
     {
         aud.clip = Attack[attackSeq];
         aud.Play();
-
+        isHurt = false;
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             Vector3 vector3 = (enemy.transform.position - transform.position);
@@ -333,11 +340,18 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!isDead)
+        if (!isDead && damage > 0)
         {
+
             health -= damage;
+           
             healthSlider.value = health;
             hurtSound.Play();
+            if (isBlocking == true)
+            {
+                blockSound.Play();
+                hurtSound.Stop();
+            }
             if (health <= 0 && GameManager.instance.isInPhase1 == true)
             {
                 this.transform.localPosition = GameManager.instance.reSpawnPoints[0].position;
@@ -354,6 +368,7 @@ public class PlayerController : MonoBehaviour
                 health = 100;
                 healthSlider.value = health;
 
+               
 
             }
 
@@ -365,9 +380,11 @@ public class PlayerController : MonoBehaviour
                 health = 100;
                 healthSlider.value = health;
 
-
             }
+
+         
         }
+       
     }
     
 
@@ -380,6 +397,7 @@ public class PlayerController : MonoBehaviour
             rageClawEffects[2].SetActive(true);
             isRaging = true;
             rageSound.Play();
+            GameManager.instance.aud.Pause();
         }
 
         if (isRaging == true)
@@ -408,6 +426,7 @@ public class PlayerController : MonoBehaviour
             rageMeter.value = rage;
             directionalLight.color = normalColor;
             isRaging = false;
+            GameManager.instance.aud.UnPause();
         }
     }
 
