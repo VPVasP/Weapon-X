@@ -303,6 +303,8 @@ public class PlayerController : MonoBehaviour
                                 enemy.GetComponent<Rigidbody>().AddForce(Vector3.up * 8f, ForceMode.Impulse);
                                 enemy.GetComponent<Enemy>().startMove = false;
                                 enemy.GetComponent<Animator>().SetTrigger("DamageBig");
+                             
+                         
                                 Debug.Log(enemy.GetComponent<Enemy>().health);
                             }
                         }
@@ -313,7 +315,8 @@ public class PlayerController : MonoBehaviour
                                 enemy.GetComponent<Enemy>().health -= smallAttackDamage;
                                 enemy.GetComponent<Animator>().SetTrigger("DamageSmall");
                                 Debug.Log(enemy.GetComponent<Enemy>().health);
-                                
+
+                               
                             }
                         }
                         var Rot = Quaternion.LookRotation(transform.position - enemy.transform.position);

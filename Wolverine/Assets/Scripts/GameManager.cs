@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     private bool hasSpawnedEnemiesPhase2 = false;
     private bool hasSpawnedEnemiesHall2 = false;
     private bool hasDoneCase21 = false;
+    public bool triggeredCase21=false;
     public bool hasSpawnedSecondPlayer = false;
     public bool isInPhase1=false;
    public bool isInPhase2 = false;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     private bool hasSpawnedEnemies = false;
     private bool hasTriggeredEndOfWave1 = false;
     private bool isSlowedTime = false;
+    public bool disableMeshAndTrigger = false;
     public int enemiesToSpawn;
     public GameObject EndCanvas;
     public int Coins;
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
     public GameObject endingCanvas;
     private Transform mainCameraTransform;
     public GameObject wilsonFiskDialogue;
+    public GameObject protectiveWallHealth;
     private void Awake()
     {
         instance = this;
@@ -90,13 +93,19 @@ public class GameManager : MonoBehaviour
         mainCameraTransform = Camera.main.transform;
         endingCanvas.SetActive(false);
         wilsonFiskDialogue.SetActive(false);
+     //   protectiveWallHealth.gameObject.SetActive(false);
+        
     }
 
 
 
     void Update()
     {
-
+        if (enemiesKilled == 21)
+        {
+         //   TriggerCase21();
+            triggeredCase21 = true;
+        }
         switch (enemiesKilled)
         {
             case 3:
@@ -135,15 +144,15 @@ public class GameManager : MonoBehaviour
                     gizmosPosition1 = new Vector3(-74.2f, 51.4f, 4f);
                     Instantiate(enemies[0], spawnPoint[0].position, Quaternion.identity);
                     Instantiate(enemies[0], spawnPoint[1].position, Quaternion.identity);
-                    GameObject newFruit = Instantiate(fruit, spawnPoint[0].position+new Vector3(5,1,-5f), Quaternion.identity);
+                    GameObject newFruit = Instantiate(fruit, spawnPoint[0].position + new Vector3(5, 1, -5f), Quaternion.identity);
                     hasSpawnedEnemiesHall = true;
                     hasSpawnedFruit = true;
                 }
                 break;
-                
-                
-                
-             
+
+
+
+
             case 12:
                 doors[1].SetActive(false);
                 enemiesToSpawn = 7;
@@ -151,53 +160,46 @@ public class GameManager : MonoBehaviour
                 isInPhase2 = true;
                 if (!hasSpawnedEnemiesPhase2)
                 {
-                  
-                   EnemySpawnerPhase2(enemiesToSpawn);
+
+                    EnemySpawnerPhase2(enemiesToSpawn);
                     hasSpawnedEnemiesPhase2 = true;
                 }
-                    break;
+                break;
             case 19:
-               
+
                 doors[2].SetActive(false);
-              //  doors[3].GetComponent<MeshRenderer>().enabled = true;
+                //  doors[3].GetComponent<MeshRenderer>().enabled = true;
                 if (!hasSpawnedEnemiesHall2)
                 {
                     waves[0].GetComponent<TextMeshProUGUI>().text = "Procceed,Boss fight after this Hall";
-                    wilsonFiskDialogue.SetActive(true);
-                    wilsonFiskDialogue.GetComponentInChildren<TextMeshProUGUI>().text = "Wilson Fisk " + "Logan,how dare you come here?!GET HIM!";
                     waves[0].SetActive(true);
                     Invoke("DeactivateTextSecond", 5f);
                     Instantiate(enemies[0], spawnPoint[2].position, Quaternion.identity);
                     Instantiate(enemies[1], spawnPoint[3].position, Quaternion.identity);
                     hasSpawnedEnemiesHall2 = true;
+                    //    doors[3].GetComponent<DoorBeforeBoss>().DisableMeshAndTrigger();
                 }
                 break;
-          
-            case 21:
-                isInPhase2 = false;
-                isInPhase3 = true;
-              
-              
-                if (!hasDoneCase21)
-                {
-                    waves[0].GetComponent<TextMeshProUGUI>().text = "Find the real bomb and throw it in the wall,Good luck surviving";
 
-                    waves[0].SetActive(true);
-                    Invoke("DeactivateTextSecond", 5f);
-                    doors[3].GetComponent<DoorBeforeBoss>().DisableMeshAndTrigger();
-                    bossManager.enabled = true;
-                    hasDoneCase21= true;
+            case 21:
+                if (triggeredCase21 == true)
+                {
+                    TriggerCase21();
+                    isInPhase3 = true;
+                    isInPhase2 = false;
                 }
                 break;
 
             case 23:
-             
+
                 break;
+
+
         }
         //if (Input.GetKeyDown(KeyCode.B) && !hasSpawnedSecondPlayer)
         //{
 
-            
+
         //    secondPlayer.gameObject.SetActive(true);
         //    secondPlayerSlider.gameObject.SetActive(true);
         //    cameras[1].gameObject.SetActive(true);
@@ -214,7 +216,25 @@ public class GameManager : MonoBehaviour
         //    FollowSecondPlayer();
         //}
     }
-    IEnumerator EndOfWave1()
+    public void TriggerCase21()
+    {
+
+        if (!disableMeshAndTrigger)
+        {
+            doors[3].GetComponent<DoorBeforeBoss>().DisableMeshAndTrigger();
+            disableMeshAndTrigger = true;
+          
+        }
+
+        isInPhase2 = false;
+        isInPhase3 = true;
+        triggeredCase21 = true;
+        
+        
+}
+        
+    
+        IEnumerator EndOfWave1()
     {
        // roundsEffect[1].Play();
         aud.volume = 0.3f;
@@ -342,6 +362,7 @@ public class GameManager : MonoBehaviour
         waves[0].SetActive(false);
         wilsonFiskDialogue.SetActive(false);
     }
+
     public void PlayStart()
     {
         waves[0].SetActive(true);
@@ -352,6 +373,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayClose()
     {
+    
         endingCanvas.SetActive(true);
         players[0].transform.localPosition = endingPosition.position;
         endingCamera.SetActive(true);

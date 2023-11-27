@@ -6178,6 +6178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR Smoke Source 3D
       objectReference: {fileID: 0}
+    - target: {fileID: 3248854109453992758, guid: 90bee816329e18040a621e8e03feac90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3248854109454163734, guid: 90bee816329e18040a621e8e03feac90,
         type: 3}
       propertyPath: m_RootOrder

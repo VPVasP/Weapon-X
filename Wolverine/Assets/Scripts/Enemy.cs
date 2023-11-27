@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -29,10 +30,9 @@ public class Enemy : MonoBehaviour
     private bool hasAddedSecondPlayer = false;
     public bool isPickedUpEnemyAttack = false;
     public GameObject deathEffect;
-
     void Start()
     {
-       
+     
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (var player in players)
         {

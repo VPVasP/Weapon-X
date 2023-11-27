@@ -11,6 +11,7 @@ public class ProtectiveWall : MonoBehaviour
     public AudioSource wallBreak;
     private void Start()
     {
+     //   wallHealthSlider.gameObject.SetActive(true);
         wallHealth = 100;
         wallHealthSlider.value = wallHealth;
     }
@@ -25,7 +26,7 @@ public class ProtectiveWall : MonoBehaviour
         if (wallHealth <= 0)
         {
             wallBreak.Play();
-            GameManager.instance.PlayEnd();
+            GameManager.instance.PlayClose();
         }
     }
 }

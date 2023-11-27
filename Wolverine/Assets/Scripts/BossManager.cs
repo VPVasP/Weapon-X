@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    public static BossManager instance;
     public GameObject bombs;
     public GameObject playerBomb;
     public Vector3 gizmosCubeSize1 = new Vector3(5f, 5f, 5f);
     public Vector3 gizmosPosition1;
     private PlayerController controller;
     public GameObject protectiveWall;
-    public GameObject healthSlidrer;
+    public GameObject bossHealthSlider;
     public GameObject[] enemies;
     public bool hasSpawnedEnemies=false;
+    public AudioSource bossMusic;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         controller = GetComponent<PlayerController>();
         StartCoroutine(BossEnumerator());
         StartCoroutine(SpawnPlayerBomb());
         protectiveWall.SetActive(true);
-        healthSlidrer.SetActive(true);
+        bossHealthSlider.SetActive(true);
 }
 
   public  IEnumerator BossEnumerator()

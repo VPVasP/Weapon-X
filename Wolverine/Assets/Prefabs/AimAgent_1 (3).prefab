@@ -2180,6 +2180,7 @@ MonoBehaviour:
   lyr:
     serializedVersion: 2
     m_Bits: 1
+  isPickedUpEnemyAttack: 0
   deathEffect: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
 --- !u!54 &8529431810903883875
 Rigidbody:
