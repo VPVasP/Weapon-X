@@ -135,7 +135,9 @@ public class Enemy : MonoBehaviour
             GameManager.instance.enemiesKilled += 1;
             GameManager.instance.enemiesKilledText.text = "Enemies Killed: " + GameManager.instance.enemiesKilled;
             GameManager.instance.Coins += randomCoins;
-            GameManager.instance.AddRage();
+            Transform targetPlayer = findBothPlayers();
+            GameObject player = targetPlayer.gameObject;
+            targetPlayer.GetComponent<PlayerController>().AddRage();
             aud.clip = enemySounds[1];
             aud.Play();
         

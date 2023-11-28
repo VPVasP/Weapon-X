@@ -101,8 +101,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 forwardVector = (transform.position - new Vector3(camTransform.position.x, transform.position.y, camTransform.position.z)).normalized;
         Vector3 rightVector = Vector3.Cross(forwardVector, Vector3.up);
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis(verticalInputAxis);
+        float horizontal = Input.GetAxis(horizontalInputAxis);
         Vector3 between = (forwardVector * vertical) + (-horizontal * rightVector);
         between = between.normalized;
 
@@ -160,13 +160,13 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetMouseButton(1)&&isgrounded==true)
+        if (Input.GetButtonDown(blockInputButton)&&isgrounded==true)
         {
             Debug.Log("Pressing Button");
             anim.SetBool("isBlocking", true);
             isBlocking = true;
         }
-        else if(Input.GetMouseButtonUp(1)&&isgrounded==true)
+        else if(Input.GetButtonUp(blockInputButton)&&isgrounded==true)
         {
             Debug.Log("Pressing Button");
             anim.SetBool("isBlocking", false);
@@ -450,20 +450,16 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.aud.UnPause();
         }
     }
-
     public void AddRage()
     {
-        rage = Mathf.Clamp(rage, 0f, 100f);
-        if (rage == 100)
-        {
-            rage += 0;
-        }
-        else
+      //  float rageToAdd = Mathf.Min(100 - rage, rage);
+        if (isRaging==false && rage < 100)
         {
             rage += 20;
             rageMeter.value = rage;
         }
-       
+        
+        
     }
    
     void RestartGame()

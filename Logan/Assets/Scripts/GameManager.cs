@@ -48,8 +48,9 @@ public class GameManager : MonoBehaviour
    // public TextMeshProUGUI coinsText;
     public Transform secondPlayer;
     public Slider secondPlayerSlider;
+    public Slider secondPlayerRage;
     public int secondPlayerHealth;
-  //  public GameObject spawnPlayer2Text,player1Text;
+    public GameObject spawnPlayer2Text,player1Text;
     public GameObject[] phases;
     public GameObject[] doors;
     public Transform[] spawnPoint;
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
         mainCameraTransform = Camera.main.transform;
         endingCanvas.SetActive(false);
         wilsonFiskDialogue.SetActive(false);
+        secondPlayerRage.gameObject.SetActive(false);
      //   protectiveWallHealth.gameObject.SetActive(false);
         
     }
@@ -101,10 +103,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            PlayClose();
-        }
+     
         if (enemiesKilled == 21)
         {
          //   TriggerCase21();
@@ -200,25 +199,25 @@ public class GameManager : MonoBehaviour
 
 
         }
-        //if (Input.GetKeyDown(KeyCode.B) && !hasSpawnedSecondPlayer)
-        //{
+        if (Input.GetKeyDown(KeyCode.B) && !hasSpawnedSecondPlayer)
+        {
 
 
-        //    secondPlayer.gameObject.SetActive(true);
-        //    secondPlayerSlider.gameObject.SetActive(true);
-        //    cameras[1].gameObject.SetActive(true);
+            secondPlayer.gameObject.SetActive(true);
+            secondPlayerSlider.gameObject.SetActive(true);
+            cameras[1].gameObject.SetActive(true);
 
-        //    player1Text.SetActive(true);
-        //    secondPlayerSlider.value = secondPlayerHealth;
+            player1Text.SetActive(true);
+            secondPlayerSlider.value = secondPlayerHealth;
 
-        //    spawnPlayer2Text.SetActive(false);
-        //    hasSpawnedSecondPlayer = true;
-
-        //}
-        //if (hasSpawnedSecondPlayer == true)
-        //{
-        //    FollowSecondPlayer();
-        //}
+            spawnPlayer2Text.SetActive(true);
+            hasSpawnedSecondPlayer = true;
+            secondPlayerRage.gameObject.SetActive(true);
+        }
+        if (hasSpawnedSecondPlayer == true)
+        {
+            FollowSecondPlayer();
+        }
     }
     public void TriggerCase21()
     {
@@ -280,9 +279,6 @@ public class GameManager : MonoBehaviour
 
     public void EnemySpawner(int numberOfEnemies)
     {
-
-
-
         int enemiesClones = numberOfEnemies;
 
 
@@ -306,9 +302,6 @@ public class GameManager : MonoBehaviour
     }
     public void EnemySpawnerPhase2(int numberOfEnemies)
     {
-
-
-
         int enemiesClones = numberOfEnemies;
 
 
@@ -332,9 +325,6 @@ public class GameManager : MonoBehaviour
     }
     public void EnemySpawnerInTransforms(int numberOfEnemies)
     {
-
-
-
         int enemiesClones = numberOfEnemies;
 
 
