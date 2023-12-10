@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     public float rageAttackDamage = 25;
     private Vector3 rotation;
     public Coroutine coroutine = null;
-    public GameObject[] claws;
     [SerializeField] private Collider col;
     public AudioClip[] Jump;
     public AudioClip damageAudio;
@@ -43,7 +42,6 @@ public class PlayerController : MonoBehaviour
     public bool playingAnim;
     public Slider healthSlider;
     public Slider rageMeter;
-    public AudioSource deadAudio, hurtSound,rageSound,whisperingRageSounds,blockSound;
     public bool isAttacking = false;
     public bool isBlocking = false;
     public bool isCurrentlyPickingUp = false;
@@ -66,7 +64,11 @@ public class PlayerController : MonoBehaviour
     public Light directionalLight;
     public Color directionalLightColor;
     public Color normalColor;
- //   public GameObject fireEffects;
+    public AudioClip deadAudio;
+    public AudioClip hurtSound;
+    public AudioClip rageSound;
+    public AudioClip blockSound;
+    //   public GameObject fireEffects;
     private void Start()
     {
         directionalLight.color = normalColor;
@@ -84,20 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         isgrounded = isGrounded();
 
-        if (playingAnim)
-        {
-            foreach (GameObject theClaws in claws)
-            {
-                theClaws.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (GameObject i in claws)
-            {
-                i.SetActive(false);
-            }
-        }
+      
 
         Vector3 forwardVector = (transform.position - new Vector3(camTransform.position.x, transform.position.y, camTransform.position.z)).normalized;
         Vector3 rightVector = Vector3.Cross(forwardVector, Vector3.up);
@@ -362,16 +351,19 @@ public class PlayerController : MonoBehaviour
             health -= damage;
            
             healthSlider.value = health;
-            hurtSound.Play();
+            aud.clip = hurtSound;
+            aud.Play();
             if (isBlocking == true)
             {
-                blockSound.Play();
-                hurtSound.Stop();
+               
+                aud.clip = blockSound;
+                aud.Play();
             }
             if (health <= 0 && GameManager.instance.isInPhase1 == true)
             {
                 this.transform.localPosition = GameManager.instance.reSpawnPoints[0].position;
-                deadAudio.Play();
+                aud.clip = deadAudio;
+                aud.Play();
                 health = 100;
                 healthSlider.value = health;
 
@@ -380,7 +372,8 @@ public class PlayerController : MonoBehaviour
             if (health <= 0 && GameManager.instance.isInPhase2 == true)
             {
                 this.transform.localPosition = GameManager.instance.reSpawnPoints[1].position;
-                deadAudio.Play();
+                aud.clip = deadAudio;
+                aud.Play();
                 health = 100;
                 healthSlider.value = health;
 
@@ -392,7 +385,8 @@ public class PlayerController : MonoBehaviour
             if (health <= 0 && GameManager.instance.isInPhase3 == true)
             {
                 this.transform.localPosition = GameManager.instance.reSpawnPoints[2].position;
-                deadAudio.Play();
+                aud.clip = deadAudio;
+                aud.Play();
                 health = 100;
                 healthSlider.value = health;
 
@@ -415,7 +409,8 @@ public class PlayerController : MonoBehaviour
             normalClawEffects[1].SetActive(false);
 
             isRaging = true;
-            rageSound.Play();
+            aud.clip = rageSound;
+            aud.Play();
             GameManager.instance.aud.Pause();
         }
 

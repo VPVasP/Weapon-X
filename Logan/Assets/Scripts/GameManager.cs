@@ -415,16 +415,7 @@ public class GameManager : MonoBehaviour
         GameObject newFruit = Instantiate(fruit, fruitPos.position, Quaternion.identity);
     }
 
-    public void AddRage()
-    {
-        if (players[0].GetComponent<PlayerController>().isRaging == false)
-        { 
-
-        
-            players[0].GetComponent<PlayerController>().AddRage();
-        }
-
-    }
+    
     public void FollowSecondPlayer()
     {
 
