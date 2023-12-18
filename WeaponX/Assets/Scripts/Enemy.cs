@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
-    public List<Transform> target = new List<Transform>(); 
-    public float activateDis;
-    public Animator anim;
+    public float speed; //our enemy speed
+    public List<Transform> target = new List<Transform>();  //lisft of the target players transform
+    public float activateDis; //our activate distance to activate the enmy
+    public Animator anim; //ou aniamtor refrence
     public bool isAsleep = true;
     public bool startMove = false;
     public float health;
@@ -19,27 +19,25 @@ public class Enemy : MonoBehaviour
     public bool playedDead = false;
     public bool canAttack;
     public AudioSource aud;
-    public AudioClip[] attackClip;
-    public AudioClip[] enemySounds;
-    public AudioClip dmg;
-    public string[] attackAnim;
-    [SerializeField] private LayerMask lyr;
+    public AudioClip[] attackClip; // array of attack audio clips
+    public AudioClip[] enemySounds;// array of enemySounds audio clips
+    public string[] attackAnim; // array of strings for the attack animation
+    [SerializeField] private LayerMask lyr; //layer mask to spot the ground
     private bool hasPlayedEnemySpottedAudio = false;
     private bool hasPlayedEnemyDeathAudio = false;
     private bool hasPlayedMainMusic = false;
     private bool hasAddedSecondPlayer = false;
-    public bool isPickedUpEnemyAttack = false;
-    public GameObject deathEffect;
+    public GameObject deathEffect; //the death effect
     void Start()
     {
      
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); //we find all the targets with the tag player
         foreach (var player in players)
         {
             target.Add(player.transform);
         }
 
-        if (target.Count > 0)
+        if (target.Count > 0) //we attack if the target players exist
         {
             StartCoroutine(doattack());
         }
@@ -48,13 +46,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        isgrounded = isGrounded();
+        isgrounded = isGrounded(); //we check if the player is grounded and update his animation
         anim.SetBool("isGrounded", isGrounded());
 
-        Transform closestPlayer = findBothPlayers();
-
+        Transform closestPlayer = findBothPlayers(); //we find the closest player 
+        //the check conditions to activat ehe enemy
         if (closestPlayer != null && (closestPlayer.position - transform.position).magnitude < activateDis && !isDead && !hasPlayedEnemySpottedAudio && !hasPlayedMainMusic)
         {
+            //we activate the enemy and play the wakeup animation and audio
             anim.SetTrigger("Wakeup");
             isAsleep = false;
             aud.clip = enemySounds[0];
@@ -64,19 +63,20 @@ public class Enemy : MonoBehaviour
             hasPlayedMainMusic = true;
         }
 
-        if (!isAsleep && !isDead)
+        if (!isAsleep && !isDead) //if the enemy is not asleep or dead perfom these 
         {
-            if (closestPlayer != null)
+            if (closestPlayer != null) //if the closest player is valid
             {
                 Vector3 direction = (closestPlayer.position - transform.position).normalized;
                 Debug.DrawLine(transform.position, closestPlayer.position, Color.red);
 
-                if (startMove && hasPlayedMainMusic)
+                if (startMove && hasPlayedMainMusic) //if the enemy can move and has played the mainmusic
                 {
-                    GameManager.instance.aud.volume = 1.0f;
+                    GameManager.instance.aud.volume = 1.0f; //we adjust the game manager volume
 
-                    if (DoesRange)
+                    if (DoesRange) //check if the enemy does a range attack
                     {
+                        //move towards the closest player if the distance is bigger than 2 and update the animations
                         if ((closestPlayer.position - transform.position).magnitude > 2 && isGrounded() && !isDead)
                         {
                             transform.Translate(direction * speed * Time.deltaTime);
@@ -89,6 +89,7 @@ public class Enemy : MonoBehaviour
                     }
                     else
                     {
+                        //the ability for the enemy to attack based on the distance 
                         if ((closestPlayer.position - transform.position).magnitude > 2 && isGrounded() && !isDead)
                         {
                             transform.Translate(direction * speed * Time.deltaTime);
@@ -109,7 +110,7 @@ public class Enemy : MonoBehaviour
                         canAttack = true;
                     }
 
-                    if (isGrounded() && !isDead)
+                    if (isGrounded() && !isDead) //if the enemy is grounded and is not enemy we update his rotation
                     {
                         direction.y = 0;
                         transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, Quaternion.LookRotation(direction), Time.deltaTime * 5f);
@@ -118,40 +119,45 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (GameManager.instance.hasSpawnedSecondPlayer && !hasAddedSecondPlayer)
+        if (GameManager.instance.hasSpawnedSecondPlayer && !hasAddedSecondPlayer) //if the second enemy has spawned we add him to the list 
         {
             Transform secondPlayerTransform = GameManager.instance.secondPlayer.transform;
             target.Add(secondPlayerTransform);
             hasAddedSecondPlayer = true;
         }
-
+        //if the enemy is dead and hasn't played the enemy audio death
         if (health <= 0 && !isDead && !hasPlayedEnemyDeathAudio)
         {
-            int randomCoins = Random.Range(1, 3);
+          
             isDead = true;
-            anim.SetTrigger("Dead");
+            anim.SetTrigger("Dead"); //we update the animation trigger to the death animation
             print("DEAD");
             
             GameManager.instance.enemiesKilled += 1;
             GameManager.instance.enemiesKilledText.text = "Enemies Killed: " + GameManager.instance.enemiesKilled;
-            GameManager.instance.Coins += randomCoins;
+            //we find both players and the player who killed the enemy we add rage 
             Transform targetPlayer = findBothPlayers();
             GameObject player = targetPlayer.gameObject;
             targetPlayer.GetComponent<PlayerController>().AddRage();
+            //play the death audio and start the dead coroutine
             aud.clip = enemySounds[1];
             aud.Play();
         
             StartCoroutine(dead());
         }
     }
+    //coroutine for the death of the enemy
     IEnumerator dead()
     {
+       
         yield return new WaitForSeconds(5f);
+        //we disable the gravity and colliders for the enemy
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         foreach (var col in this.gameObject.GetComponents<Collider>())
         {
             col.enabled = false;
         }
+        //we hide the children of the model slowly to make the death animation
         transform.GetChild(0).gameObject.SetActive(false);
         yield return new WaitForSeconds(0.15f);
         transform.GetChild(0).gameObject.SetActive(true);
@@ -160,52 +166,56 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
+        //we instatiate the death effect of the enemy
         GameObject theDeathEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
-
+    //void to the start the enemy attack
     public void StartAttack()
     {
         startMove = true;
         anim.SetBool("isWalking", true);
     }
-
+    //coroutine to do the enemy attacks
     IEnumerator doattack()
     {
         while (true)
         {
             yield return new WaitForSeconds(3f);
+            //play a random attack animation 
             if (startMove && canAttack && !GameManager.instance.players[0].GetComponent<PlayerController>().isDead && !isDead)
             {
                 anim.Play(attackAnim[Random.Range(0, 2)]);
             }
         }
     }
-
+    //disable the animator 
     public void DisableAnim()
     {
         anim.enabled = false;
     }
+    //method that handles the enemy attacks
     public void attack(float damage)
     {
+        //we play the attack audio
         aud.clip = attackClip[Random.Range(0, attackClip.Length)];
         aud.Play();
-
+        //we find the target player
         Transform targetPlayer = findBothPlayers();
 
-        if (targetPlayer != null)
+        if (targetPlayer != null) //if the targetplayer is valid
         {
             Vector3 playerToEnemy = (targetPlayer.position - transform.position);
             playerToEnemy.y = 0;
             Vector3 localF = transform.GetChild(0).forward;
 
             GameObject player = targetPlayer.gameObject;
-
+            //if the player is within the enemy rattack range
             if (playerToEnemy.magnitude <= 3)
             {
                 float angle = Vector3.Angle(localF, playerToEnemy);
                 print(angle);
-
+                //we check the angle to do a valid attack
                 if (angle < 90)
                 {
                     aud.clip = attackClip[Random.Range(0, attackClip.Length)];
@@ -223,6 +233,7 @@ public class Enemy : MonoBehaviour
 
                         if (angleToPlayer < 90)
                         {
+                            // apply damage if the player is not dead or blocking
                             if (!player.GetComponent<PlayerController>().isDead && !player.GetComponent<PlayerController>().isBlocking)
                             {
                                 int randomDamage = Random.Range(15, 28);
@@ -236,6 +247,7 @@ public class Enemy : MonoBehaviour
                                 //   player.GetComponent<PlayerController>().isHurt = true;
                                 var rotation = Quaternion.LookRotation(transform.position - player.transform.position);
                             }
+                            //apply the damage if the player is blocking
                             else if (!player.GetComponent<PlayerController>().isDead && player.GetComponent<PlayerController>().isBlocking)
                             {
                                 Vector3 backwardForce = -transform.forward * 2.0f;
@@ -246,6 +258,7 @@ public class Enemy : MonoBehaviour
                             }
                             else
                             {
+                                //we appply force to the dead player
                                 if (!player.GetComponent<PlayerController>().isDeadAnimation)
                                 {
                                     startMove = false;
@@ -253,12 +266,8 @@ public class Enemy : MonoBehaviour
                                     player.GetComponent<Rigidbody>().AddForce(playerToEnemyNormalized * 2f, ForceMode.Impulse);
                                 }
                             }
-                                if (player.GetComponent<PlayerController>().isPickedUp == true)
-                                {
-                                    isPickedUpEnemyAttack = true;
-}
 
-                            }
+                        }
 
                         }
                     }
@@ -266,7 +275,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
-
+    //method to find the closest player of all the targets
     Transform findBothPlayers()
     {
         Transform closestPlayer = null;
@@ -284,7 +293,7 @@ public class Enemy : MonoBehaviour
         }
 
         return closestPlayer;
-    }
+    }//method to check if the enemy is grounded
     bool isGrounded()
     {
         Debug.DrawRay(transform.position, Vector3.down * 0.1f);
