@@ -4710,9 +4710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89866087e3545641bc49fd045c1d2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 6
-  minZoom: 30
-  maxZoom: 60
   player: {fileID: 737981624}
   camOffset: {x: 0, y: 23, z: -21}
   Smoothness: 0.5
@@ -5139,8 +5136,8 @@ MonoBehaviour:
   enemies:
   - {fileID: 8529431810903883886, guid: 1a47c729cca0b134dbba329be34e7f59, type: 3}
   - {fileID: 8529431810903883886, guid: c73d19afc0fe5484687464b464677c2a, type: 3}
-  gizmosCubeSize1: {x: 5, y: 1, z: 5}
-  gizmosPosition1: {x: 0, y: 0, z: 0}
+  gizmosCubeSize: {x: 5, y: 5, z: 5}
+  gizmosPosition: {x: -82, y: 50, z: -70}
   enemiesToSpawn: 0
   secondPlayer: {fileID: 737981624}
   secondPlayerSlider: {fileID: 1600989799}
@@ -5160,13 +5157,12 @@ MonoBehaviour:
   - {fileID: 1274585497}
   - {fileID: 2110914902}
   - {fileID: 1912176084}
-  bossManager: {fileID: 0}
   reSpawnPoints:
   - {fileID: 326895541}
   - {fileID: 1807550533}
   - {fileID: 1180498993}
   wilsonFiskDialogue: {fileID: 832965667}
-  protectiveWallHealth: {fileID: 0}
+  protectiveWallHealth: {fileID: 1151566913}
 --- !u!4 &492167709
 Transform:
   m_ObjectHideFlags: 0
@@ -5175,7 +5171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492167707}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5316772, y: -0.5305309, z: -14.941586}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7451,8 +7447,6 @@ MonoBehaviour:
   rage: 0
   playerSpeed: 5
   jumpForce: 8
-  _speed: 10
-  _rotationSpeed: 60
   smallAttackDamage: 5
   largeAttackDamage: 15
   rageAttackDamage: 25
@@ -7469,7 +7463,6 @@ MonoBehaviour:
   killedAudio:
   - {fileID: 0}
   - {fileID: 0}
-  kofx: {fileID: 0}
   attackSeq: 0
   dashForce: 1
   lAttack:
@@ -16181,7 +16174,6 @@ GameObject:
   - component: {fileID: 1693763616}
   - component: {fileID: 1693763615}
   - component: {fileID: 1693763614}
-  - component: {fileID: 1693763618}
   - component: {fileID: 1693763617}
   - component: {fileID: 1693763619}
   m_Layer: 0
@@ -16190,7 +16182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1693763614
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16269,18 +16261,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1693763618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693763612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2da550dfe6c7b4bba20252060ece77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1693763619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16293,12 +16273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a1ef0272e1d2c469df4466e0aa309e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  round1Transform: {fileID: 0}
-  round2Transform: {fileID: 0}
-  Player: {fileID: 1878799279}
-  smoke: {fileID: 3248854109453992758, guid: 90bee816329e18040a621e8e03feac90, type: 3}
-  spawnEffect: {fileID: 8831483849074638183, guid: 312ba85dd590af94c919828c4be9226d,
-    type: 3}
 --- !u!1 &1701537504 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3232734783225999616, guid: 69917b420017633439b4a764a748be7f,
@@ -25205,8 +25179,6 @@ MonoBehaviour:
   rage: 0
   playerSpeed: 5
   jumpForce: 8
-  _speed: 10
-  _rotationSpeed: 60
   smallAttackDamage: 5
   largeAttackDamage: 15
   rageAttackDamage: 25
@@ -25223,7 +25195,6 @@ MonoBehaviour:
   killedAudio:
   - {fileID: 0}
   - {fileID: 0}
-  kofx: {fileID: 0}
   attackSeq: 0
   dashForce: 1
   lAttack:

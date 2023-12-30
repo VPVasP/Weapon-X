@@ -324,7 +324,12 @@ public class GameManager : MonoBehaviour
         }
 
     }
-     //we deactivate the wilson dialogue and the waves 0 from the array waves
+    //we deactivate the wilson dialogue and the waves 0 from the array waves
+    public void DeactivateText()
+    {
+        waves[0].SetActive(false);
+        wilsonFiskDialogue.SetActive(false);
+    }
     public void DeactivateTextSecond()
     {
         waves[0].SetActive(false);
